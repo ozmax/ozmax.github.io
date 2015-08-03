@@ -1,0 +1,32 @@
+<div id="LoginContainer" ng-controller="LoginController as login">
+            <form name="loginForm" ng-submit="loginForm.$valid && login.submitForm()" ng-show="!auth_token" novalidate>
+             <div class="panel-heading">
+            <div class="panel-title">Sign In</div>
+            </div>
+            <div class="panel-body">
+            <div class="form-group">
+                 <div class="input-group">
+                 <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+               <input ng-model="login.username" type="text"
+               class="form-control" id="username" placeholder="Username"
+               required>
+            </div>
+            </div>
+            <div class="form-group">
+                    <div class="input-group">
+                   <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+               <input ng-model="login.password" type="password"
+               class="form-control" id="password" placeholder="Password"
+               required>
+                
+            </div>
+            </div>
+            reviewForm is {{loginForm.$valid}}
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
+            </div>
+            </form>
+                <div ng-show="auth_token">
+               auth_token is: {{auth_token}}
+            </div>
+</div>
+
