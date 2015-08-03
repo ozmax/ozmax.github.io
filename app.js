@@ -4,7 +4,28 @@
   app.directive('loginForm', function(){
     return{
         restrict: 'E',
-        templateUrl: 'login-form.html'
+        templateUrl: 'login-form.html',
+        controller:function(){
+            app.controller('LoginController',['$scope', '$http', function($scope, $http){
+                $scope.auth_token = ''
+                this.submitForm = function(){
+                    data = {
+                        'username': this.username,
+                        'password': this.password
+                    }
+                    var url = "http://ozmaxplanet.com:8000/auth/login/"
+                    $http.post(url, data)
+                    .success(function(response){
+                        $scope.auth_token = response['auth_token']
+                    })
+                    .error(function(data, status){
+                        console.log(data);
+                    });
+                };
+            }]);
+
+        },
+        controllerAs: 'login'
     };
   });
 
@@ -28,21 +49,4 @@
     };
   });
 
-  app.controller('LoginController',['$scope', '$http', function($scope, $http){
-    $scope.auth_token = ''
-    this.submitForm = function(){
-        data = {
-            'username': this.username,
-            'password': this.password
-        }
-        var url = "http://ozmaxplanet.com:8000/auth/login/"
-        $http.post(url, data)
-        .success(function(response){
-            $scope.auth_token = response['auth_token']
-        })
-        .error(function(data, status){
-            console.log(data);
-        });
-    };
-  }]);
-})();
+  })();
