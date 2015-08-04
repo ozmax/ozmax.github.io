@@ -1,6 +1,6 @@
 (function(){
 
-var app = angular.module('link-ap', ['ngRoute']);
+var app = angular.module('link-app', []);
 
 app.directive('navbarElement', function(){
     return{
@@ -8,7 +8,7 @@ app.directive('navbarElement', function(){
         templateUrl: 'templates/nav.html',
         controller: function(){
             this.tabItems = ['Auth', 'Links', 'Contacts', 'Settings'];
-            this.tab = 1;
+            this.tab = 0;
             this.selectTab = function(clickedTab){
                 this.tab = clickedTab;
             };
@@ -16,7 +16,7 @@ app.directive('navbarElement', function(){
                 return this.tab == checkTab;
             };
         },
-        controllerAs: 'navCtrl';
+        controllerAs: 'navCtrl'
     };
 });
 })();
