@@ -7,7 +7,12 @@ app.directive('navbarElement', function(){
         restrict: 'E',
         templateUrl: 'templates/nav.html',
         controller: function(){
-            this.tabItems = ['Auth', 'Links', 'Contacts', 'Settings'];
+            this.tabItems = {
+                'Auth': 'glyphicon glyphicon-user', 
+                'Links':  'glyphicon glyphicon-th-list', 
+                'Contacts': 'glyphicon glyphicon-book', 
+                'Settings': 'glyphicon glyphicon-wrench'
+            };
             this.tab = 0;
             this.selectTab = function(clickedTab){
                 this.tab = clickedTab;
