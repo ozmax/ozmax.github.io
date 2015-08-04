@@ -1,0 +1,44 @@
+<html ng-app='store'>
+  <head>
+    <meta charset="UTF-8">
+    <title>test</title> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+    <script src="app.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<style>
+.ng-invalid.ng-dirty{
+    border-color: #FA787E;
+}
+.ng-valid.ng-dirty{
+    border-color: #78FA89;
+}
+
+</style>
+
+  </head>
+  <body>
+    <div ng-controller="StoreController">
+      <section ng-controller="PanelController as panel">
+        <ul class="nav nav-pills">
+          <li ng-class="{active:panel.isSelected(0)}">
+            <a href="#"  ng-click="panel.selectTab(0)">auth</a>
+          </li>
+          <li ng-class="{active:panel.isSelected($index+1)}" ng-repeat="(key, value) in data.data">
+            <a href="#"  ng-click="panel.selectTab($index+1)">{{key}}</a>
+          </li>
+        </ul>
+
+
+        <div style="margin-top:20px; width:600px;" class="panel panel-info" ng-show="panel.isSelected(0)">
+            <login-form></login-form>                    
+        </div>
+        <div class="panel" ng-show="panel.isSelected(1)">foo</div>
+        <div class="panel" ng-show="panel.isSelected(2)">bar</div>
+        <div class="panel" ng-show="panel.isSelected(3)">qux</div>
+        </section>
+    </div>
+  </body>
+</html>
