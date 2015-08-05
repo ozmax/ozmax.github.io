@@ -19,8 +19,12 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'templates/settings.html',
             controller: 'FooController'
         }).
+        when('/login', {
+            templateUrl: 'templates/login.html',
+            controller: 'FooController'
+        }).
         otherwise({
-            redirectTo: '/profile'
+            redirectTo: '/links'
         });
 }]);
 
@@ -34,14 +38,13 @@ app.directive('navbarElement', function($location){
         templateUrl: 'templates/nav.html',
         controller: function($location){
             this.tabItems = {
-                'profile':  'glyphicon glyphicon-user', 
-                'links':    'glyphicon glyphicon-th-list', 
-                'contacts': 'glyphicon glyphicon-book', 
-                'settings': 'glyphicon glyphicon-wrench'
+                'links':    'fa-list-ul', 
+                'contacts': 'fa-users', 
+                'profile':  'fa-user', 
+                'settings': 'fa-cog'
             };
             var path = $location.$$path.substring(1);
             this.tab = path;
-            
             this.selectTab = function(clickedTab){
                 this.tab = clickedTab;
             };
