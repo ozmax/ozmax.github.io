@@ -24,24 +24,24 @@ app.config(['$routeProvider', function($routeProvider){
         });
 }]);
 
-app.controller('FooController', function($location){
-    console.log($location);
-    console.log($location.$$path);
+app.controller('FooController', function(){
 
 });
 
-app.directive('navbarElement', function(){
+app.directive('navbarElement', function($location){
     return{
         restrict: 'E',
         templateUrl: 'templates/nav.html',
-        controller: function(){
+        controller: function($location){
             this.tabItems = {
-                'Profile': 'glyphicon glyphicon-user', 
-                'Links':  'glyphicon glyphicon-th-list', 
-                'Contacts': 'glyphicon glyphicon-book', 
-                'Settings': 'glyphicon glyphicon-wrench'
+                'profile': 'glyphicon glyphicon-user', 
+                'links':  'glyphicon glyphicon-th-list', 
+                'contacts': 'glyphicon glyphicon-book', 
+                'settings': 'glyphicon glyphicon-wrench'
             };
-            this.tab = 0;
+            var path = $location.$$path.substring(1);
+            this.tab = path;
+            
             this.selectTab = function(clickedTab){
                 this.tab = clickedTab;
             };
@@ -52,7 +52,5 @@ app.directive('navbarElement', function(){
         controllerAs: 'navCtrl'
     };
 });
-
-
 
 })();

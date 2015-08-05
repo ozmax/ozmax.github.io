@@ -11,8 +11,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li ng-repeat="(key, value) in navCtrl.tabItems" ng-class="{active:navCtrl.isSelected($index)}">
-                    <a ng-click="navCtrl.selectTab($index)" href="#/{{key | lowercase}}">
+                <li ng-repeat="(key, value) in navCtrl.tabItems" ng-class="{active:navCtrl.isSelected(key)}">
+                    <a ng-click="navCtrl.selectTab(key)" href="#/{{key}}">
                         <span class="glyphicon {{value}}"></span>&nbsp;&nbsp;{{key}}
                     </a>
                 </li>
