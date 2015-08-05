@@ -7,6 +7,10 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'templates/profile.html',
             controller: 'FooController'
         }).
+        when('/links', {
+            templateUrl: 'templates/links.html',
+            controller: 'FooController'
+        }).
         otherwise({
             redirectTo: '/profile'
         });
