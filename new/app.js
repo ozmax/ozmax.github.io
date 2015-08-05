@@ -11,12 +11,21 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'templates/links.html',
             controller: 'FooController'
         }).
+        when('/contacts', {
+            templateUrl: 'templates/contacts.html',
+            controller: 'FooController'
+        }).
+        when('/settings', {
+            templateUrl: 'templates/settings.html',
+            controller: 'FooController'
+        }).
         otherwise({
             redirectTo: '/profile'
         });
 }]);
 
-app.controller('FooController', function(){
+app.controller('FooController', function($location){
+    console.log($location.$$path);
 
 });
 
