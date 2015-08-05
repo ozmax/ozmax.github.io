@@ -34,8 +34,8 @@ app.directive('navbarElement', function($location){
         templateUrl: 'templates/nav.html',
         controller: function($location){
             this.tabItems = {
-                'profile': 'glyphicon glyphicon-user', 
-                'links':  'glyphicon glyphicon-th-list', 
+                'profile':  'glyphicon glyphicon-user', 
+                'links':    'glyphicon glyphicon-th-list', 
                 'contacts': 'glyphicon glyphicon-book', 
                 'settings': 'glyphicon glyphicon-wrench'
             };
