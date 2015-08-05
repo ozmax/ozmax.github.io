@@ -1,6 +1,20 @@
 (function(){
 
-var app = angular.module('link-app', []);
+var app = angular.module('link-app', ['ngRoute']);
+app.config(['$routeProvider', function($routeProvider){
+    $routeProvider.
+        when('/profile', {
+            templateUrl: 'templates/profile.html',
+            controller: 'FooController'
+        }).
+        otherwise({
+            redirectTo: '/profile'
+        });
+}]);
+
+app.controller('FooController', function(){
+
+});
 
 app.directive('navbarElement', function(){
     return{
@@ -24,4 +38,7 @@ app.directive('navbarElement', function(){
         controllerAs: 'navCtrl'
     };
 });
+
+
+
 })();
