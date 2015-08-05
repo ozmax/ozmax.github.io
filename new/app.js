@@ -38,10 +38,10 @@ app.directive('navbarElement', function($location){
         templateUrl: 'templates/nav.html',
         controller: function($location){
             this.tabItems = {
-                'links':    'fa-list-ul', 
-                'contacts': 'fa-users', 
-                'profile':  'fa-user', 
-                'settings': 'fa-cog'
+                'links':    'fa-th', 
+                'contacts': 'fa-edit', 
+                'profile':  'fa-male', 
+                'settings': 'fa-cogs'
             };
             var path = $location.$$path.substring(1);
             this.tab = path;
