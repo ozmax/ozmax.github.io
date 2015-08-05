@@ -25,6 +25,7 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('FooController', function($location){
+    console.log($location);
     console.log($location.$$path);
 
 });
