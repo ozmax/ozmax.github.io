@@ -8,7 +8,7 @@ app.directive('navbarElement', function(){
         templateUrl: 'templates/nav.html',
         controller: function(){
             this.tabItems = {
-                'Auth': 'glyphicon glyphicon-user', 
+                'Profile': 'glyphicon glyphicon-user', 
                 'Links':  'glyphicon glyphicon-th-list', 
                 'Contacts': 'glyphicon glyphicon-book', 
                 'Settings': 'glyphicon glyphicon-wrench'
