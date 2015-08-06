@@ -5,6 +5,7 @@ var app = angular.module('link-app', ['ngCookies', 'ngRoute']);
 app.service('authService', ['$http', '$location', '$cookies', function($http, $location, $cookies){
     base_url = "http://ozmaxplanet.com:8000"
     login_url = base_url + '/auth/login/';
+    profile_url = base_url + '/auth/me/'
     this.isAuthenticated = false;
     this.auth_token = '';
     if ($cookies.get('token')){
@@ -24,6 +25,17 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
                 console.log(response)
             });
     };
+    this.get_profile = function(){
+        headers = {'Authorization': 'Token '+ this.auth_token};
+        $http.get(profile_url, {'headers': headers}).
+            then(function(response){
+                console.log(response);
+                return response;
+            },
+            function(response){
+                return response;
+            });
+    };
 }]);
 
 app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
@@ -41,7 +53,8 @@ app.config(['$routeProvider', function($routeProvider){
     $routeProvider.
         when('/profile', {
             templateUrl: 'templates/profile.html',
-            controller: 'FooController'
+            controller: 'ProfileController',
+            controllserAs: 'profCtrl'
         }).
         when('/links', {
             templateUrl: 'templates/links.html',
@@ -75,6 +88,14 @@ app.controller('LoginController',['authService', '$location',  function(authServ
         };
         authService.login(credentials);
     };
+}]);
+app.controller('ProfileController',[ 'authService', function(authService){
+    token = authService.auth_token
+    console.log(token);
+    data = authService.get_profile();
+    console.log(data);
+
+
 }]);
 app.controller('FooController',[ 'authService', function(authService){
     
