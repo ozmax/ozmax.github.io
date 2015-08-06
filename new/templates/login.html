@@ -5,17 +5,19 @@
                <div class="panel-title">Sign In</div>
             </div>
             <div class="panel-body" style="padding-top:30px">
-                <form class="form form-horizontal">
+                <form class="form form-horizontal"
+                ng-submit="loginCtrl.submit()">
                     <div class="input-group" style="margin-bottom: 25px">
                         <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input type="text" class="form-control" placeholder="username">
+                        <input ng-model="loginCtrl.username" type="text" class="form-control" placeholder="username">
                     </div>
                     <div class="input-group" style="margin-bottom: 25px">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" class="form-control" placeholder="password">
+                        <input ng-model="loginCtrl.password" type="password" class="form-control" placeholder="password">
                     </div>
                     <div class="col-sm-12 controls" style="padding-left:50px;">
-                        <a href="#/" class="btn btn-success">Login  </a>
+                        <input type="submit" value="Login" class="btn
+                        btn-success" />
                     </div>
                 </form>
             </div>
