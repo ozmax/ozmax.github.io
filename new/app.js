@@ -1,16 +1,22 @@
 (function(){
 
-var app = angular.module('link-app', ['ngRoute']);
+var app = angular.module('link-app', ['ngCookies', 'ngRoute']);
 
-app.service('authService', ['$http', '$location',  function($http, $location){
+app.service('authService', ['$http', '$location', '$cookies', function($http, $location, $cookies){
     base_url = "http://ozmaxplanet.com:8000"
     login_url = base_url + '/auth/login/';
     this.isAuthenticated = false;
+    this.auth_token = '';
+    if ($cookies.get('token')){
+        this.isAuthenticated = true;
+        this.auth_token = $cookies.get('token');
+    }
     the_service = this;
     this.login = function(credentials){
         $http.post(login_url, credentials).
             then(function(response){
                 auth_token = response.data.auth_token;
+                $cookies.put('token', auth_token);
                 the_service.isAuthenticated = true;
                 $location.path('/links');
             },
