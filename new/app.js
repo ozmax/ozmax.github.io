@@ -1,6 +1,22 @@
 (function(){
 
+
+
 var app = angular.module('link-app', ['ngRoute']);
+
+app.service('authService', function(){
+    this.isAuthenticated = false;
+});
+
+app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
+    $rootScope.$on('$routeChangeStart', function(event){
+        if (!authService.isAuthenticated){
+            console.log('not logged');
+            $location.path('/login')
+        }
+    });
+}]);
+
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.
         when('/profile', {
@@ -28,9 +44,10 @@ app.config(['$routeProvider', function($routeProvider){
         });
 }]);
 
-app.controller('FooController', function(){
+app.controller('FooController',[ 'authService', function(authService){
+    console.log(authService.isAuthenticated);
 
-});
+}]);
 
 app.directive('navbarElement', function($location){
     return{
