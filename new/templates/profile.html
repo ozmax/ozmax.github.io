@@ -1,15 +1,16 @@
 <div id="profile-wrapper" style="width: 600px; padding-top: 150px; margin: 0
 auto;">
     <div class="well well-lg">
-        <div class="panel panel-danger">
+        <div class="panel panel-success">
             <div class=panel-heading>
                 panel heading   
             </div>
             <div class="panel-body">
-                this is body
+                token: {{authService.auth_token}}
             </div>
             <div class="panel-footer">
-                this is footer
+                <button class="btn btn-danger"
+                ng-click="authService.logout()">Logout</button>
             <div>
         </div>
     </div>

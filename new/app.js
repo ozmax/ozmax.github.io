@@ -6,6 +6,7 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
     base_url = "http://ozmaxplanet.com:8000"
     login_url = base_url + '/auth/login/';
     profile_url = base_url + '/auth/me/'
+    logout_url = base_url + '/auth/logout/'
     this.isAuthenticated = false;
     this.auth_token = '';
     if ($cookies.get('token')){
@@ -16,8 +17,8 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
     this.login = function(credentials){
         $http.post(login_url, credentials).
             then(function(response){
-                auth_token = response.data.auth_token;
-                $cookies.put('token', auth_token);
+                the_service.auth_token = response.data.auth_token;
+                $cookies.put('token', the_service.auth_token);
                 the_service.isAuthenticated = true;
                 $location.path('/links');
             },
@@ -36,10 +37,26 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
                 return response;
             });
     };
+    this.logout = function(){
+        headers = {'Authorization': 'Token '+ this.auth_token};
+        this_service = this;
+        $http.post(logout_url,{}, {'headers': headers}).
+            then(function(response){
+                this_service.auth_token = '';
+                this_service.isAuthenticated = false;
+                $cookies.remove('token');
+                $location.path('/login');
+            },
+            function(response){
+                console.log(response);
+            });
+    
+    };
 }]);
 
 app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
     $rootScope.$on('$routeChangeStart', function(event){
+        console.log($location.path());
         if (authService.isAuthenticated && ($location.path()=='/login')){
             $location.path('/links')
         }
@@ -89,11 +106,10 @@ app.controller('LoginController',['authService', '$location',  function(authServ
         authService.login(credentials);
     };
 }]);
-app.controller('ProfileController',[ 'authService', function(authService){
-    token = authService.auth_token
-    console.log(token);
+app.controller('ProfileController',['$scope', 'authService', function($scope, authService){
+    $scope.authService = authService; 
+    token = authService.auth_token;
     data = authService.get_profile();
-    console.log(data);
 
 
 }]);
@@ -125,5 +141,4 @@ app.directive('navbarElement',['authService', function($scope, authService){
         controllerAs: 'navCtrl'
     };
 }]);
-
 })();
