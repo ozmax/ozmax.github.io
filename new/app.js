@@ -56,7 +56,6 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
 
 app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
     $rootScope.$on('$routeChangeStart', function(event){
-        console.log($location.path());
         if (authService.isAuthenticated && ($location.path()=='/login')){
             $location.path('/links')
         }
@@ -129,6 +128,10 @@ app.directive('navbarElement',['authService', function($scope, authService){
                 'profile':  'fa-male', 
                 'settings': 'fa-cogs'
             };
+            this_ctrl = this;
+            $scope.$on('$routeChangeStart', function(){
+                this_ctrl.tab = $location.$$path.substring(1);
+            });
             var path = $location.$$path.substring(1);
             this.tab = path;
             this.selectTab = function(clickedTab){
