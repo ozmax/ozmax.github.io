@@ -1,26 +1,82 @@
 <div id="links-wrapper">
     <div class="page-header" style="padding-top:150px; width: 600px; margin: 0 auto;">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-               <div class="panel-title">Sign In</div>
+        
+
+        <div id="loginbox" ng-show="loginCtrl.currentForm=='loginform'" class="mainbox">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <div class="panel-title">Sign In</div>
+                </div>
+                <div class="panel-body" style="padding-top:30px">
+                    <form class="form form-horizontal"
+                    ng-submit="loginCtrl.submitLogin()">
+                        <div class="input-group" style="margin-bottom: 25px">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input ng-model="loginCtrl.loginUsername" type="text" class="form-control" placeholder="username">
+                        </div>
+                        <div class="input-group" style="margin-bottom: 25px">
+                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                            <input ng-model="loginCtrl.loginPassword" type="password" class="form-control" placeholder="password">
+                        </div>
+                        <div class="col-sm-12 controls" style="padding-left:50px;">
+                            <input type="submit" value="Login" class="btn
+                            btn-success" />
+                            <a href="#" ng-click="loginCtrl.swapForm()" class="btn btn-info">Sign Up</a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="panel-body" style="padding-top:30px">
-                <form class="form form-horizontal"
-                ng-submit="loginCtrl.submit()">
-                    <div class="input-group" style="margin-bottom: 25px">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                        <input ng-model="loginCtrl.username" type="text" class="form-control" placeholder="username">
-                    </div>
-                    <div class="input-group" style="margin-bottom: 25px">
-                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input ng-model="loginCtrl.password" type="password" class="form-control" placeholder="password">
-                    </div>
-                    <div class="col-sm-12 controls" style="padding-left:50px;">
-                        <input type="submit" value="Login" class="btn
-                        btn-success" />
-                    </div>
-                </form>
+        </div><!-- login div ends here -->
+        
+
+        <div id="signupbox" ng-show="loginCtrl.currentForm=='registerform'" class="mainbox">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <div class="panel-title">Sign Up</div>
+                </div>
+                <div class="panel-body">
+                    <form id="signupform" ng-submit="loginCtrl.submitRegister()" class="form-horizontal" role="form">
+
+                        <div class="form-group">
+                            <label for="username" class="col-md-2 control-label">Username*</label>
+                            <div class="col-md-10">
+                                <input ng-model="loginCtrl.regUsername" type="text" class="form-control" name="username" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fname" class="col-md-2 control-label">First Name</label>
+                            <div class="col-md-10">
+                                <input ng-model="loginCtrl.regFname" type="text" class="form-control" name="fname" placeholder="John">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lname" class="col-md-2 control-label">Last Name</label>
+                            <div class="col-md-10">
+                                <input ng-model="loginCtrl.regLname" type="text" class="form-control" name="lname" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-md-2 control-label">Email*</label>
+                            <div class="col-md-10">
+                                <input ng-model="loginCtrl.regEmail" type="text" class="form-control" name="email" placeholder="example@example.com">
+                            </div>
+                         </div>
+                        <div class="form-group">
+                            <label for="password" class="col-md-2 control-label">Password*</label>
+                            <div class="col-md-10">
+                                <input ng-model="loginCtrl.regPassword" type="password" class="form-control" name="password" placeholder="*****">
+                            </div>
+                        </div>
+                        <div class="col-sm-12 controls" style="padding-left:100px;">
+                            <input type="submit" value="Register" class="btn btn-success" />
+                            <a href="#" ng-click="loginCtrl.swapForm()" class="btn btn-info">Login</a>
+                        </div>
+                    </form>
+                </div>
+
             </div>
-        </div>
-    </div>
+        </div><!-- signup div ends here -->
+
+
+    </div><!-- page header ends here -->
 </div>

@@ -7,6 +7,7 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
     login_url = base_url + '/auth/login/';
     profile_url = base_url + '/auth/me/'
     logout_url = base_url + '/auth/logout/'
+    register_url = base_url + '/auth/register/'
     this.isAuthenticated = false;
     this.auth_token = '';
     if ($cookies.get('token')){
@@ -14,6 +15,15 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
         this.auth_token = $cookies.get('token');
     }
     the_service = this;
+    this.register = function(regData){
+        $http.post(register_url, regData).
+            then(function(response){
+                console.log(response);
+            },
+            function(response){
+                console.log(response);
+            });
+    };
     this.login = function(credentials){
         $http.post(login_url, credentials).
             then(function(response){
@@ -23,7 +33,7 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
                 $location.path('/links');
             },
             function(response){
-                console.log(response)
+                console.log(response);
             });
     };
     this.get_profile = function(){
@@ -95,14 +105,34 @@ app.config(['$routeProvider', function($routeProvider){
 }]);
 
 app.controller('LoginController',['authService', '$location',  function(authService, $location){
-    this.username = '';
-    this.password = '';
-    this.submit = function(){
+    this.loginUsername = '';
+    this.loginPassword = '';
+    this.currentForm = 'registerform';
+    this.swapForm = function(){
+        if(this.currentForm == 'loginform'){
+            this.currentForm = 'registerform';
+        }
+        else{
+            this.currentForm = 'loginform';
+        }
+       };
+    this.submitLogin = function(){
         credentials = {
-            'username': this.username,
-            'password': this.password
+            'username': this.loginUsername,
+            'password': this.loginPassword
         };
         authService.login(credentials);
+    };
+    this.submitRegister = function(){
+        regData = {
+            'username': this.regUsername,
+            'first_name': this.regFname,
+            'last_name': this.regLname,
+            'email': this.regEmail,
+            'password': this.regPassword
+        };
+        console.log(regData);
+    
     };
 }]);
 app.controller('ProfileController',['$scope', 'authService', function($scope, authService){
