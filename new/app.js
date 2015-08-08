@@ -131,7 +131,7 @@ app.controller('LoginController',['authService', '$location',  function(authServ
             'email': this.regEmail,
             'password': this.regPassword
         };
-        console.log(regData);
+        authService.register(regData);
     
     };
 }]);
