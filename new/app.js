@@ -107,7 +107,7 @@ app.config(['$routeProvider', function($routeProvider){
 app.controller('LoginController',['authService', '$location',  function(authService, $location){
     this.loginUsername = '';
     this.loginPassword = '';
-    this.currentForm = 'registerform';
+    this.currentForm = 'loginform';
     this.swapForm = function(){
         if(this.currentForm == 'loginform'){
             this.currentForm = 'registerform';
