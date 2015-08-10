@@ -149,7 +149,7 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
     this_ = this;
     url = "http://ozmaxplanet.com:8000/contacts/";
     headers = {'Authorization': 'Token ' + authService.auth_token};
-    this.showForm = true;
+    this.showForm = false;
     this.swapShowForm = function(){
         if (this.showForm == false){
             this.showForm = true;    
@@ -176,6 +176,17 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
         $http.get(url, {'headers': headers}).
             then(function(response){
                 this_.data = response.data;
+                console.log(response.data);
+            },
+            function(response){
+                console.log(response);
+            });
+    };
+    this.delete = function(id){
+        $http.delete(url+id+'/', {'headers': headers}).
+            then(function(response){
+                console.log(response);
+                this_.getContacts();
             },
             function(response){
                 console.log(response);

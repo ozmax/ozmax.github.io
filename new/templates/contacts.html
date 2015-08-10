@@ -4,13 +4,13 @@
         <table class="table table-bordered table-striped table-hover">
             <caption class="text-info">
                 Contacts 
-                <button ng-hide="cCtrl.showForm" class="btn btn-xs btn-success" ng-click="cCtrl.swapShowForm()">New Contact</button>
-                <button ng-show="cCtrl.showForm" class="btn btn-xs btn-danger"
+                <button type="button" ng-hide="cCtrl.showForm" class="btn btn-xs btn-success" ng-click="cCtrl.swapShowForm()">New Contact</button>
+                <button type="button" ng-show="cCtrl.showForm" class="btn btn-xs btn-danger"
                 ng-click="cCtrl.swapShowForm()">Cancel</button>
             </caption>
             <thead>
                 <tr>
-                    <th>Full Name</th><th>Email</th><th>Groups</th>
+                    <th>Full Name</th><th>Email</th><th>Groups</th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +27,19 @@
                         </td>
                 </tr>
                 <tr ng-repeat="contact in cCtrl.data">
-                    <td>{{contact.full_name}}</td><td>{{contact.email}}</td><td></td>
+                    <td>
+                        {{contact.full_name}}
+                    </td>
+                    <td>
+                        {{contact.email}}
+                    </td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-xs btn-info">Edit</button>
+                        <a type="button" confirm="wut?"
+                        ng-click="cCtrl.delete(contact.id)" class="btn btn-xs
+                        btn-danger">Delete</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
