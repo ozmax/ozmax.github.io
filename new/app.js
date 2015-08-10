@@ -88,7 +88,8 @@ app.config(['$routeProvider', function($routeProvider){
         }).
         when('/contacts', {
             templateUrl: 'templates/contacts.html',
-            controller: 'FooController'
+            controller: 'ContactsController',
+            controllerAs: 'cCtrl'
         }).
         when('/settings', {
             templateUrl: 'templates/settings.html',
@@ -135,13 +136,55 @@ app.controller('LoginController',['authService', '$location',  function(authServ
     
     };
 }]);
-app.controller('ProfileController',['$scope', 'authService', function($scope, authService){
+
+app.controller('ProfileController', ['$scope', 'authService', function($scope, authService){
     $scope.authService = authService; 
     token = authService.auth_token;
     data = authService.get_profile();
 
 
 }]);
+
+app.controller('ContactsController', ['authService', '$http', function(authService, $http){
+    this_ = this;
+    url = "http://ozmaxplanet.com:8000/contacts/";
+    headers = {'Authorization': 'Token ' + authService.auth_token};
+    this.showForm = true;
+    this.swapShowForm = function(){
+        if (this.showForm == false){
+            this.showForm = true;    
+        }
+        else{
+            this.showForm = false;
+        }
+    };
+    this.submitForm = function(){
+        postData = {
+            'full_name': this.full_name,
+            'email': this.email
+        };
+        $http.post(url, postData, {'headers': headers}).
+            then(function(response){
+                console.log(response);
+                this_.getContacts();
+            },
+            function(response){
+                console.log(response);
+            });
+        };
+    this.getContacts = function(){
+        $http.get(url, {'headers': headers}).
+            then(function(response){
+                this_.data = response.data;
+            },
+            function(response){
+                console.log(response);
+            });
+    };
+    this.getContacts();
+
+}]);
+
 app.controller('FooController',[ 'authService', function(authService){
     
 }]);

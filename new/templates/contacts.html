@@ -1,23 +1,36 @@
-<div id="links-wrapper ">
-    <div class="page-header" style="padding-top:150px; width: 600px; margin: 0
-    auto;">
+<div id="contacts-wrapper ">
+    <div class="page-header" style="padding-top:150px; width: 600px; margin: 0 auto;">
+        <form novalidate ng-submit="cCtrl.submitForm()">
         <table class="table table-bordered table-striped table-hover">
+            <caption class="text-info">
+                Contacts 
+                <button ng-hide="cCtrl.showForm" class="btn btn-xs btn-success" ng-click="cCtrl.swapShowForm()">New Contact</button>
+                <button ng-show="cCtrl.showForm" class="btn btn-xs btn-danger"
+                ng-click="cCtrl.swapShowForm()">Cancel</button>
+            </caption>
             <thead>
                 <tr>
-                    <th></th><th class="text-center">Contacts</th><th></th>
+                    <th>Full Name</th><th>Email</th><th>Groups</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Name</td><td>Surname</td><td>Email</td>
+                <tr ng-show="cCtrl.showForm">
+                        <td>
+                            <input type="text" placeholder="John Doe" ng-model="cCtrl.full_name">
+                        </td>
+                        <td>
+                            <input type="text" placeholder="ex@example.com" ng-model="cCtrl.email">
+                        </td>
+                        <td><select style="color:black"><option>1</option><option>2</option></select>
+                            <input type="submit" value="OK" class="btn
+                            btn-success btn-xs">
+                        </td>
                 </tr>
-                <tr>
-                    <td>Name</td><td>Surname</td><td>Email</td>
-                </tr>
-                <tr>
-                    <td>Name</td><td>Surname</td><td>Email</td>
+                <tr ng-repeat="contact in cCtrl.data">
+                    <td>{{contact.full_name}}</td><td>{{contact.email}}</td><td></td>
                 </tr>
             </tbody>
         </table>
+        </form>
     </div>
 </div>
