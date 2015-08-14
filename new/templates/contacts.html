@@ -35,7 +35,9 @@
                     </td>
                     <td></td>
                     <td>
-                        <button type="button" class="btn btn-xs btn-info">Edit</button>
+                        <button ng-click="cCtrl.editContact($index)" type="button" class="btn btn-xs btn-info">
+                            Edit
+                        </button>
                         <a type="button" confirm="wut?"
                         ng-click="cCtrl.delete(contact.id)" class="btn btn-xs
                         btn-danger">Delete</a>

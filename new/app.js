@@ -152,25 +152,51 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
     this.showForm = false;
     this.swapShowForm = function(){
         if (this.showForm == false){
+            this.full_name = "";
+            this.email = "";
+            this.id = "";
             this.showForm = true;    
         }
         else{
+            this.full_name = "";
+            this.email = "";
+            this.id = "";
             this.showForm = false;
         }
     };
     this.submitForm = function(){
-        postData = {
-            'full_name': this.full_name,
-            'email': this.email
-        };
-        $http.post(url, postData, {'headers': headers}).
-            then(function(response){
-                console.log(response);
-                this_.getContacts();
-            },
-            function(response){
-                console.log(response);
-            });
+        if (this.id){
+            patchData = {
+                'full_name': this.full_name,
+                'email':  this.email
+            };
+            url_id = this.id+"/"
+            $http.patch(url+url_id, patchData, {'headers': headers}).
+                then(function(response){
+                    console.log(response);
+                    this_.showForm = false;
+                    this_.getContacts();
+                },
+                function(response){
+                    console.log(response);
+                });
+
+        }
+        else{
+            postData = {
+                'full_name': this.full_name,
+                'email': this.email
+            };
+            $http.post(url, postData, {'headers': headers}).
+                then(function(response){
+                    console.log(response);
+                    this_.showForm = false;
+                    this_.getContacts();
+                },
+                function(response){
+                    console.log(response);
+                });
+        }
         };
     this.getContacts = function(){
         $http.get(url, {'headers': headers}).
@@ -181,6 +207,15 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
             function(response){
                 console.log(response);
             });
+    };
+    this.editContact = function(index){
+        this.showForm = true;
+        contact = this.data[index];
+        console.log(contact);
+        this.full_name = contact.full_name;
+        this.email = contact.email;
+        this.id = contact.id;
+        
     };
     this.delete = function(id){
         $http.delete(url+id+'/', {'headers': headers}).
