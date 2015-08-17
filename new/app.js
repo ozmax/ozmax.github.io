@@ -5,7 +5,6 @@ var app = angular.module('link-app', ['ngCookies', 'ngRoute']);
 app.service('authService', ['$http', '$location', '$cookies', function($http, $location, $cookies){
     base_url = "http://ozmaxplanet.com:8000"
     login_url = base_url + '/auth/login/';
-    profile_url = base_url + '/auth/me/'
     logout_url = base_url + '/auth/logout/'
     register_url = base_url + '/auth/register/'
     this.isAuthenticated = false;
@@ -45,17 +44,7 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
         }
     };
 
-    this.get_profile = function(){
-        headers = {'Authorization': 'Token '+ this.auth_token};
-        $http.get(profile_url, {'headers': headers}).
-            then(function(response){
-                console.log(response);
-                return response;
-            },
-            function(response){
-                the_service.check_401(response);
-            });
-    };
+    
     this.logout = function(){
         headers = {'Authorization': 'Token '+ this.auth_token};
         this_service = this;
@@ -89,7 +78,7 @@ app.config(['$routeProvider', function($routeProvider){
         when('/profile', {
             templateUrl: 'templates/profile.html',
             controller: 'ProfileController',
-            controllserAs: 'profCtrl'
+            controllerAs: 'profCtrl'
         }).
         when('/links', {
             templateUrl: 'templates/links.html',
@@ -146,12 +135,24 @@ app.controller('LoginController',['authService', '$location',  function(authServ
     };
 }]);
 
-app.controller('ProfileController', ['$scope', 'authService', function($scope, authService){
+app.controller('ProfileController', ['$scope', '$http', 'authService',
+function($scope, $http, authService){
+    base_url = "http://ozmaxplanet.com:8000";
+    profile_url = base_url + '/auth/me/';
     $scope.authService = authService; 
     token = authService.auth_token;
-    data = authService.get_profile();
-
-
+    this_ = this;
+    this.get_profile = function(){
+        headers = {'Authorization': 'Token '+ token};
+        $http.get(profile_url, {'headers': headers}).
+            then(function(response){
+                this_.data = response.data
+            },
+            function(response){
+                authService.check_401(response);
+            });
+    };
+    this.get_profile();
 }]);
 
 app.controller('ContactsController', ['authService', '$http', function(authService, $http){
