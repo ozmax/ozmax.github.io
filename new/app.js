@@ -36,6 +36,15 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
                 console.log(response);
             });
     };
+
+    this.check_401 = function(response){
+        if (response.status == 401){
+            this.auth_token = ''
+            this.isAuthenticated = false;
+            $location.path('/links');
+        }
+    };
+
     this.get_profile = function(){
         headers = {'Authorization': 'Token '+ this.auth_token};
         $http.get(profile_url, {'headers': headers}).
@@ -44,7 +53,7 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
                 return response;
             },
             function(response){
-                return response;
+                the_service.check_401(response);
             });
     };
     this.logout = function(){
@@ -58,7 +67,7 @@ app.service('authService', ['$http', '$location', '$cookies', function($http, $l
                 $location.path('/login');
             },
             function(response){
-                console.log(response);
+                the_service.check_304(response);
             });
     
     };
@@ -178,7 +187,7 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
                     this_.getContacts();
                 },
                 function(response){
-                    console.log(response);
+                    authService.check_401(response)
                 });
 
         }
@@ -194,7 +203,7 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
                     this_.getContacts();
                 },
                 function(response){
-                    console.log(response);
+                    authService.check_401(response)
                 });
         }
         };
@@ -205,7 +214,7 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
                 console.log(response.data);
             },
             function(response){
-                console.log(response);
+                authService.check_401(response)
             });
     };
     this.editContact = function(index){
@@ -224,7 +233,7 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
                 this_.getContacts();
             },
             function(response){
-                console.log(response);
+                authService.check_401(response)
             });
     };
     this.getContacts();
