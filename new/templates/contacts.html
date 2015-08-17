@@ -21,9 +21,16 @@
                         <td>
                             <input type="text" placeholder="ex@example.com" ng-model="cCtrl.email">
                         </td>
-                        <td><select style="color:black"><option>1</option><option>2</option></select>
-                            <input type="submit" value="OK" class="btn
-                            btn-success btn-xs">
+                        <td>
+                            <select multiple="multiple" size="3" style="color:black">
+                                <option ng-repeat="cat in cCtrl.categories"
+                                    value="{{cat.id}}">
+                                    {{cat.name}}
+                                </option>
+                            </select>
+                        </td>
+                        <td>                            
+                            <input type="submit" value="OK" class="btn btn-success btn-xs">
                         </td>
                 </tr>
                 <tr ng-repeat="contact in cCtrl.data">

@@ -159,7 +159,7 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
     this_ = this;
     url = "http://ozmaxplanet.com:8000/contacts/";
     headers = {'Authorization': 'Token ' + authService.auth_token};
-    this.showForm = false;
+    this.showForm = true;
     this.swapShowForm = function(){
         if (this.showForm == false){
             this.full_name = "";
@@ -183,7 +183,6 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
             url_id = this.id+"/"
             $http.patch(url+url_id, patchData, {'headers': headers}).
                 then(function(response){
-                    console.log(response);
                     this_.showForm = false;
                     this_.getContacts();
                 },
@@ -199,7 +198,6 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
             };
             $http.post(url, postData, {'headers': headers}).
                 then(function(response){
-                    console.log(response);
                     this_.showForm = false;
                     this_.getContacts();
                 },
@@ -207,12 +205,21 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
                     authService.check_401(response)
                 });
         }
-        };
+    };
+    cat_url = "http://ozmaxplanet.com:8000/categories/";
+    this.getCategories = function(){
+        $http.get(cat_url, {'headers': headers}).
+            then(function(response){
+                this_.categories = response.data
+            },
+            function(response){
+            
+            });
+    }
     this.getContacts = function(){
         $http.get(url, {'headers': headers}).
             then(function(response){
                 this_.data = response.data;
-                console.log(response.data);
             },
             function(response){
                 authService.check_401(response)
@@ -221,7 +228,6 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
     this.editContact = function(index){
         this.showForm = true;
         contact = this.data[index];
-        console.log(contact);
         this.full_name = contact.full_name;
         this.email = contact.email;
         this.id = contact.id;
@@ -230,7 +236,6 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
     this.delete = function(id){
         $http.delete(url+id+'/', {'headers': headers}).
             then(function(response){
-                console.log(response);
                 this_.getContacts();
             },
             function(response){
@@ -238,6 +243,7 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
             });
     };
     this.getContacts();
+    this.getCategories();
 
 }]);
 
