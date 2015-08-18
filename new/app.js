@@ -82,7 +82,8 @@ app.config(['$routeProvider', function($routeProvider){
         }).
         when('/links', {
             templateUrl: 'templates/links.html',
-            controller: 'FooController'
+            controller: 'LinksController',
+            controllerAs: 'lCtrl'
         }).
         when('/contacts', {
             templateUrl: 'templates/contacts.html',
@@ -245,6 +246,25 @@ app.controller('ContactsController', ['authService', '$http', function(authServi
     this.getContacts();
     this.getCategories();
 
+}]);
+
+app.controller('LinksController',[ 'authService', '$http',
+function(authService, $http){
+    this_ = this;
+    url = "http://ozmaxplanet.com:8000/links/"
+    headers = {'Authorization': "Token " + authService.auth_token};
+    this.getLinks = function(){
+        $http.get(url, {'headers': headers}).
+            then(function(response){
+                this_.links = response.data;
+                console.log(response.data);
+            },
+            function(response){
+                console.log(response);
+            });
+    };
+    this.getLinks();
+     
 }]);
 
 app.controller('FooController',[ 'authService', function(authService){
