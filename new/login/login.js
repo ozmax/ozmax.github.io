@@ -1,9 +1,11 @@
 angular.module('link-app').controller('LoginController',['authService', '$location', '$cookies', '$http',
 function(authService, $location, $cookies, $http){
+    base_url = "http://ozmaxplanet.com:8000"
+    this.notReg = true;
     this.loginUsername = '';
     this.loginPassword = '';
     this_ = this;
-    login_url = "http://ozmaxplanet.com:8000/auth/login/";
+    login_url = base_url + "/auth/login/";
     this.login = function(credentials){
         $http.post(login_url, credentials).
             then(function(response){
@@ -39,12 +41,35 @@ function(authService, $location, $cookies, $http){
             this.currentForm = 'loginform';
         }
        };
+    this.swapFormAndNoMessage = function(){
+        this.swapForm();
+        if (!this.notReg){
+            this.notReg = true;
+            this.loginUsername = this.regUsername;
+            this.regUsername = '';
+            this.regFname = '';
+            this.regLname = '';
+            this.regEmail = '';
+            this.regPassword = '';
+        }
+    };
     this.submitLogin = function(){
         credentials = {
             'username': this.loginUsername,
             'password': this.loginPassword
         };
         this.login(credentials);
+    };
+    register_url = base_url + '/auth/register/'
+    this.register = function(regData){
+        $http.post(register_url, regData).
+            then(function(response){
+                console.log(response);
+                this_.notReg = false;
+            },
+            function(response){
+                console.log(response);
+            });
     };
     this.submitRegister = function(){
         regData = {
@@ -54,7 +79,6 @@ function(authService, $location, $cookies, $http){
             'email': this.regEmail,
             'password': this.regPassword
         };
-        authService.register(regData);
+        this.register(regData);
     };
 }]);
-
