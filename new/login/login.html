@@ -11,39 +11,36 @@
                     <form class="form " ng-submit="loginCtrl.submitLogin()">
 
                         <div class="form-group">
-                        <div class="input-group"
-                        ng-class="{'has-error':(loginCtrl.form_error &&
-                        loginCtrl.er_username) || loginCtrl.er_non_field}">
-                            <span class="input-group-addon">
-                                <i class="fa fa-user"></i>
-                            </span>
-                            <input ng-model="loginCtrl.loginUsername" type="text" class="form-control" placeholder="username">
-                        </div>
-                        <p ng-show="loginCtrl.form_error &&
-                        loginCtrl.er_username" class="help-block text-warning"
-                        style="padding-left:50px;">
-                            {{loginCtrl.er_username}}
-                        </p>
+
+                            <div class="input-group" ng-class=
+                            "{'has-error':(loginCtrl.form_error && loginCtrl.er_username) || loginCtrl.er_non_field}">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                <input ng-model="loginCtrl.loginUsername" type="text" class="form-control" placeholder="username">
+                            </div>
+                            <p ng-show="loginCtrl.form_error && loginCtrl.er_username" class="help-block text-warning" style="padding-left:50px;">
+                                {{loginCtrl.er_username}}
+                            </p>
                         </div>
 
                         <div class="form-group">
-                        <div class="input-group"
-                        ng-class="{'has-error':(loginCtrl.form_error &&
-                        loginCtrl.er_password) || loginCtrl.er_non_field}">
-                            <span class="input-group-addon">
-                                <i class="fa fa-lock"></i>
-                            </span>
-                            <input ng-model="loginCtrl.loginPassword" type="password" class="form-control" placeholder="password">
-                        </div>
-                        <p ng-show="loginCtrl.form_error  &&
-                        loginCtrl.er_password" class="help-block text-warning"
-                        style="padding-left:50px; margin-bottom: 25px;">
-                            {{loginCtrl.er_password}}
-                        </p>
-                        <p ng-show="loginCtrl.form_error " class="help-block text-warning"
-                        style="padding-left:50px; margin-bottom: 25px;">
-                            {{loginCtrl.er_non_field}}
-                        </p>
+                            <div class="input-group" ng-class=
+                            "{'has-error':(loginCtrl.form_error && loginCtrl.er_password) || loginCtrl.er_non_field}">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                                <input ng-model="loginCtrl.loginPassword" type="password" class="form-control" placeholder="password">
+                            </div>
+                            <p ng-show="loginCtrl.form_error  && loginCtrl.er_password" class="help-block text-warning" 
+                            style="padding-left:50px; margin-bottom: 25px;">
+                                {{loginCtrl.er_password}}
+                            </p>
+                            <p ng-show="loginCtrl.form_error " class="help-block text-warning"
+                            style="padding-left:50px; margin-bottom: 25px;
+                            margin-top: 30px;">
+                                {{loginCtrl.er_non_field}}
+                            </p>
 
                         </div>
                         <div class="col-sm-12 controls" style="padding-left:50px;">
@@ -57,7 +54,9 @@
         </div><!-- login div ends here -->
 
 
-        <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform'" class="mainbox">
+        <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform' &&
+        loginCtrl.notReg"
+        class="mainbox">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 <div class="panel-title">Sign Up</div>
@@ -77,7 +76,7 @@
                                 <input ng-model="loginCtrl.regFname" type="text" class="form-control" name="fname" placeholder="John">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group has-error">
                             <label for="lname" class="col-md-2 control-label">Last Name</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.regLname" type="text" class="form-control" name="lname" placeholder="Doe">
@@ -104,6 +103,13 @@
 
             </div>
         </div><!-- signup div ends here -->
+        <div class="well well-bg" ng-hide="loginCtrl.notReg">
+            <p class="text-success"> Registration successful!<br>An email has
+            been sent to <strong>{{loginCtrl.regEmail}}</strong> in order to activate the
+            account.
+            <button class="btn btn-info"
+            ng-click="loginCtrl.swapFormAndNoMessage()">Login</button>
+        </div>
 
 
     </div><!-- page header ends here -->
