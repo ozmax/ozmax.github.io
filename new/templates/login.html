@@ -5,18 +5,40 @@
         <div id="loginbox" ng-show="loginCtrl.currentForm=='loginform'" class="mainbox">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                <div class="panel-title">Sign In</div>
+                    <div class="panel-title">Sign In</div>
                 </div>
                 <div class="panel-body" style="padding-top:30px">
-                    <form class="form form-horizontal"
-                    ng-submit="loginCtrl.submitLogin()">
-                        <div class="input-group" style="margin-bottom: 25px">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <form class="form " ng-submit="loginCtrl.submitLogin()">
+
+                        <div class="form-group">
+                        <div class="input-group" ng-class="{'has-error':loginCtrl.form_error}">
+                            <span class="input-group-addon">
+                                <i class="fa fa-user"></i>
+                            </span>
                             <input ng-model="loginCtrl.loginUsername" type="text" class="form-control" placeholder="username">
                         </div>
-                        <div class="input-group" style="margin-bottom: 25px">
-                            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <p ng-show="loginCtrl.form_error" class="help-block text-warning"
+                        style="padding-left:50px;">
+                            {{loginCtrl.er_username}}
+                        </p>
+                        </div>
+
+                        <div class="form-group">
+                        <div class="input-group" style="" ng-class="{'has-error':loginCtrl.form_error}">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock"></i>
+                            </span>
                             <input ng-model="loginCtrl.loginPassword" type="password" class="form-control" placeholder="password">
+                        </div>
+                        <p ng-show="loginCtrl.form_error" class="help-block text-warning"
+                        style="padding-left:50px; margin-bottom: 25px;">
+                            {{loginCtrl.er_password}}
+                        </p>
+                        <p ng-show="loginCtrl.form_error" class="help-block text-warning"
+                        style="padding-left:50px; margin-bottom: 25px;">
+                            {{loginCtrl.er_non_field}}
+                        </p>
+
                         </div>
                         <div class="col-sm-12 controls" style="padding-left:50px;">
                             <input type="submit" value="Login" class="btn
@@ -27,9 +49,9 @@
                 </div>
             </div>
         </div><!-- login div ends here -->
-        
 
-        <div id="signupbox" ng-show="loginCtrl.currentForm=='registerform'" class="mainbox">
+
+        <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform'" class="mainbox">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 <div class="panel-title">Sign Up</div>
