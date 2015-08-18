@@ -13,7 +13,9 @@
                         <div class="form-group">
 
                             <div class="input-group" ng-class=
-                            "{'has-error':(loginCtrl.form_error && loginCtrl.er_username) || loginCtrl.er_non_field}">
+                            "{'has-error':(loginCtrl.form_error &&
+                            loginCtrl.er_username) ||
+                            loginCtrl.er_non_field_errors}">
                                 <span class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                 </span>
@@ -26,7 +28,9 @@
 
                         <div class="form-group">
                             <div class="input-group" ng-class=
-                            "{'has-error':(loginCtrl.form_error && loginCtrl.er_password) || loginCtrl.er_non_field}">
+                            "{'has-error':(loginCtrl.form_error &&
+                            loginCtrl.er_password) ||
+                            loginCtrl.er_non_field_errors}">
                                 <span class="input-group-addon">
                                     <i class="fa fa-lock"></i>
                                 </span>
@@ -39,7 +43,7 @@
                             <p ng-show="loginCtrl.form_error " class="help-block text-warning"
                             style="padding-left:50px; margin-bottom: 25px;
                             margin-top: 30px;">
-                                {{loginCtrl.er_non_field}}
+                                {{loginCtrl.er_non_field_errors}}
                             </p>
 
                         </div>
@@ -65,50 +69,50 @@
                     <form id="signupform" ng-submit="loginCtrl.submitRegister()" class="form-horizontal" role="form">
 
                         <div class="form-group" ng-class="{'has-warning':
-                            loginCtrl.er_Username}">
+                            loginCtrl.er_reg_username}">
                             <label for="username" class="col-md-2 control-label">Username*</label>
                             <div class="col-md-10">
-                                <input ng-model="loginCtrl.regUsername" type="text" class="form-control" name="username" placeholder="Username">
+                                <input ng-model="loginCtrl.reg_username" type="text" class="form-control" name="username" placeholder="Username">
                             </div>
                             <div class="col-md-2"></div>
                             <div class="help-block col-md-10"
-                            ng-show="loginCtrl.er_Username">
-                            {{loginCtrl.er_Username}}
+                            ng-show="loginCtrl.er_reg_username">
+                            {{loginCtrl.er_reg_username}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="fname" class="col-md-2 control-label">First Name</label>
                             <div class="col-md-10">
-                                <input ng-model="loginCtrl.regFname" type="text" class="form-control" name="fname" placeholder="John">
+                                <input ng-model="loginCtrl.reg_fname" type="text" class="form-control" name="fname" placeholder="John">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="lname" class="col-md-2 control-label">Last Name</label>
                             <div class="col-md-10">
-                                <input ng-model="loginCtrl.regLname" type="text" class="form-control" name="lname" placeholder="Doe">
+                                <input ng-model="loginCtrl.reg_lname" type="text" class="form-control" name="lname" placeholder="Doe">
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-warning':
-                            loginCtrl.er_Email}">
+                            loginCtrl.er_reg_email}">
                             <label for="email" class="col-md-2 control-label">Email*</label>
                             <div class="col-md-10">
-                                <input ng-model="loginCtrl.regEmail" type="text" class="form-control" name="email" placeholder="example@example.com">
+                                <input ng-model="loginCtrl.reg_email" type="text" class="form-control" name="email" placeholder="example@example.com">
                             </div>
                             <div class="col-md-2"></div>
                             <div class="help-block col-md-10 "
-                            ng-show="loginCtrl.er_Email">
-                            {{loginCtrl.er_Email}}
+                            ng-show="loginCtrl.er_reg_email">
+                            {{loginCtrl.er_reg_email}}
                             </div>
                         </div>
                         <div class="form-group" ng-class="{'has-warning':
-                            loginCtrl.er_Password}">
+                            loginCtrl.er_reg_password}">
                             <label for="password" class="col-md-2 control-label">Password*</label>
                             <div class="col-md-10">
-                                <input ng-model="loginCtrl.regPassword" type="password" class="form-control" name="password" placeholder="*****">
+                                <input ng-model="loginCtrl.reg_password" type="password" class="form-control" name="password" placeholder="*****">
                             </div>
                             <div class="col-md-2"></div>
                             <div class="help-block col-md-10"
-                            ng-show="loginCtrl.er_Password">{{loginCtrl.er_Password}}
+                            ng-show="loginCtrl.er_reg_password">{{loginCtrl.er_reg_password}}
                             </div>
                         </div>
                         <div class="col-sm-12 controls" style="padding-left:100px;">

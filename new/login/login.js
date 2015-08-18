@@ -1,11 +1,11 @@
-angular.module('link-app').controller('LoginController',['authService', '$location', '$cookies', '$http',
-function(authService, $location, $cookies, $http){
+angular.module('link-app').controller('LoginController',['authService', '$location', '$cookies', '$http', function(authService, $location, $cookies, $http){
     base_url = "http://ozmaxplanet.com:8000"
-    this.notReg = true;
-    this.loginUsername = '';
-    this.loginPassword = '';
-    this_ = this;
+    register_url = base_url + '/auth/register/'
     login_url = base_url + "/auth/login/";
+    this.notReg = true;
+    this_ = this;
+
+    loginFields = ['username', 'password', 'non_field_errors'];
     this.login = function(credentials){
         $http.post(login_url, credentials).
             then(function(response){
@@ -15,18 +15,12 @@ function(authService, $location, $cookies, $http){
                 $location.path('/links');
             },
             function(response){
-                this_.er_password = '';
-                this_.er_username = '';
-                this_.er_non_field = '';
                 data = response.data;
-                if (data.username){
-                this_.er_username = data.username[0];
-                }
-                if (data.password){
-                this_.er_password = data.password[0];
-                }
-                if (data.non_field_errors){
-                this_.er_non_field = data.non_field_errors[0];
+                for (var i=0; i<loginFields.length; i++){
+                    this_['er_'+loginFields[i]] = '';
+                    if (data[loginFields[i]]){
+                        this_['er_'+loginFields[i]] = data[loginFields[i]][0];
+                    }
                 }
                 this_.form_error = true;
             });
@@ -34,7 +28,7 @@ function(authService, $location, $cookies, $http){
 
     this.currentForm = 'loginform';
     this.swapForm = function(){
-        if(this.currentForm == 'loginform'){
+        if (this.currentForm == 'loginform'){
             this.currentForm = 'registerform';
         }
         else{
@@ -42,18 +36,19 @@ function(authService, $location, $cookies, $http){
         }
     };
 
-    var fieldNames = ['Username', 'Password', 'Fname', 'Lname', 'Email'];
-    var apiNames = ['username', 'password', 'first_name', 'last_name', 'email'];
+    var fieldNames = ['username', 'password', 'email'];
+    
     this.swapFormAndNoMessage = function(){
         this.swapForm();
         if (!this.notReg){
             this.notReg = true;
-            this.loginUsername = this.regUsername;
+            this.loginUsername = this.reg_username;
             for (var i=0; i<fieldNames.length; i++){
-                this['reg'+fieldNames[i]] = '';
+                this['reg_'+fieldNames[i]] = '';
             }
         }
     };
+    
     this.submitLogin = function(){
         credentials = {
             'username': this.loginUsername,
@@ -61,7 +56,7 @@ function(authService, $location, $cookies, $http){
         };
         this.login(credentials);
     };
-    register_url = base_url + '/auth/register/'
+    
     this.register = function(regData){
         $http.post(register_url, regData).
             then(function(response){
@@ -69,23 +64,24 @@ function(authService, $location, $cookies, $http){
             },
             function(response){
             for (var i=0; i<fieldNames.length; i++){
-                this_['er_'+fieldNames[i]] = '';
+                this_['er_reg_'+fieldNames[i]] = '';
             }
                 data = response.data;
                 for (var i=0; i<fieldNames.length; i++){
-                    if (data[apiNames[i]]){
-                        this_['er_'+fieldNames[i]]=data[apiNames[i]][0];
+                    if (data[fieldNames[i]]){
+                        this_['er_reg_'+fieldNames[i]]=data[fieldNames[i]][0];
                     }
                 }
             });
     };
+    
     this.submitRegister = function(){
         regData = {
-            'username': this.regUsername,
-            'first_name': this.regFname,
-            'last_name': this.regLname,
-            'email': this.regEmail,
-            'password': this.regPassword
+            'username': this.reg_username,
+            'first_name': this.reg_fname,
+            'last_name': this.reg_lname,
+            'email': this.reg_email,
+            'password': this.reg_password
         };
         this.register(regData);
     };
