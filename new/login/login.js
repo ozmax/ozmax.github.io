@@ -40,17 +40,18 @@ function(authService, $location, $cookies, $http){
         else{
             this.currentForm = 'loginform';
         }
-       };
+    };
+
+    var fieldNames = ['Username', 'Password', 'Fname', 'Lname', 'Email'];
+    var apiNames = ['username', 'password', 'first_name', 'last_name', 'email'];
     this.swapFormAndNoMessage = function(){
         this.swapForm();
         if (!this.notReg){
             this.notReg = true;
             this.loginUsername = this.regUsername;
-            this.regUsername = '';
-            this.regFname = '';
-            this.regLname = '';
-            this.regEmail = '';
-            this.regPassword = '';
+            for (var i=0; i<fieldNames.length; i++){
+                this['reg'+fieldNames[i]] = '';
+            }
         }
     };
     this.submitLogin = function(){
@@ -64,11 +65,18 @@ function(authService, $location, $cookies, $http){
     this.register = function(regData){
         $http.post(register_url, regData).
             then(function(response){
-                console.log(response);
                 this_.notReg = false;
             },
             function(response){
-                console.log(response);
+            for (var i=0; i<fieldNames.length; i++){
+                this_['er_'+fieldNames[i]] = '';
+            }
+                data = response.data;
+                for (var i=0; i<fieldNames.length; i++){
+                    if (data[apiNames[i]]){
+                        this_['er_'+fieldNames[i]]=data[apiNames[i]][0];
+                    }
+                }
             });
     };
     this.submitRegister = function(){

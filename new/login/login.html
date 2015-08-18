@@ -64,10 +64,16 @@
                 <div class="panel-body">
                     <form id="signupform" ng-submit="loginCtrl.submitRegister()" class="form-horizontal" role="form">
 
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{'has-warning':
+                            loginCtrl.er_Username}">
                             <label for="username" class="col-md-2 control-label">Username*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.regUsername" type="text" class="form-control" name="username" placeholder="Username">
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="help-block col-md-10"
+                            ng-show="loginCtrl.er_Username">
+                            {{loginCtrl.er_Username}}
                             </div>
                         </div>
                         <div class="form-group">
@@ -76,22 +82,33 @@
                                 <input ng-model="loginCtrl.regFname" type="text" class="form-control" name="fname" placeholder="John">
                             </div>
                         </div>
-                        <div class="form-group has-error">
+                        <div class="form-group">
                             <label for="lname" class="col-md-2 control-label">Last Name</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.regLname" type="text" class="form-control" name="lname" placeholder="Doe">
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" ng-class="{'has-warning':
+                            loginCtrl.er_Email}">
                             <label for="email" class="col-md-2 control-label">Email*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.regEmail" type="text" class="form-control" name="email" placeholder="example@example.com">
                             </div>
-                         </div>
-                        <div class="form-group">
+                            <div class="col-md-2"></div>
+                            <div class="help-block col-md-10 "
+                            ng-show="loginCtrl.er_Email">
+                            {{loginCtrl.er_Email}}
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{'has-warning':
+                            loginCtrl.er_Password}">
                             <label for="password" class="col-md-2 control-label">Password*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.regPassword" type="password" class="form-control" name="password" placeholder="*****">
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="help-block col-md-10"
+                            ng-show="loginCtrl.er_Password">{{loginCtrl.er_Password}}
                             </div>
                         </div>
                         <div class="col-sm-12 controls" style="padding-left:100px;">
@@ -106,7 +123,7 @@
         <div class="well well-bg" ng-hide="loginCtrl.notReg">
             <p class="text-success"> Registration successful!<br>An email has
             been sent to <strong>{{loginCtrl.regEmail}}</strong> in order to activate the
-            account.
+            account.</p>
             <button class="btn btn-info"
             ng-click="loginCtrl.swapFormAndNoMessage()">Login</button>
         </div>
