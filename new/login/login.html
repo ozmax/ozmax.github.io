@@ -1,75 +1,67 @@
 <div id="links-wrapper">
     <div class="page-header" style="padding-top:150px; width: 600px; margin: 0 auto;">
-        
 
-        <div id="loginbox" ng-show="loginCtrl.currentForm=='loginform'" class="mainbox">
+        <div id="loginbox" ng-show="loginCtrl.currentForm == 'loginform'">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="panel-title">Sign In</div>
                 </div>
                 <div class="panel-body" style="padding-top:30px">
-                    <form class="form " ng-submit="loginCtrl.submitLogin()">
-
+                    
+                    <form class="form " ng-submit="loginCtrl.login()">
+                        
                         <div class="form-group">
-
-                            <div class="input-group" ng-class=
-                            "{'has-error':(loginCtrl.form_error &&
-                            loginCtrl.er_username) ||
-                            loginCtrl.er_non_field_errors}">
+                            <div class="input-group" ng-class="{'has-error':loginCtrl.er_username||loginCtrl.er_non_field_errors}">
                                 <span class="input-group-addon">
                                     <i class="fa fa-user"></i>
                                 </span>
                                 <input ng-model="loginCtrl.loginUsername" type="text" class="form-control" placeholder="username">
                             </div>
-                            <p ng-show="loginCtrl.form_error && loginCtrl.er_username" class="help-block text-warning" style="padding-left:50px;">
+                            <p ng-show="loginCtrl.er_username" class="help-block text-warning" style="padding-left:50px;">
                                 {{loginCtrl.er_username}}
                             </p>
                         </div>
-
+                        
                         <div class="form-group">
-                            <div class="input-group" ng-class=
-                            "{'has-error':(loginCtrl.form_error &&
-                            loginCtrl.er_password) ||
-                            loginCtrl.er_non_field_errors}">
+                            <div class="input-group" ng-class="{'has-error':loginCtrl.er_password||loginCtrl.er_non_field_errors}">
                                 <span class="input-group-addon">
                                     <i class="fa fa-lock"></i>
                                 </span>
                                 <input ng-model="loginCtrl.loginPassword" type="password" class="form-control" placeholder="password">
                             </div>
-                            <p ng-show="loginCtrl.form_error  && loginCtrl.er_password" class="help-block text-warning" 
+                            <p ng-show="loginCtrl.er_password" class="help-block text-warning" 
                             style="padding-left:50px; margin-bottom: 25px;">
                                 {{loginCtrl.er_password}}
                             </p>
-                            <p ng-show="loginCtrl.form_error " class="help-block text-warning"
+                            <p ng-show="loginCtrl.er_non_field_errors" class="help-block text-warning"
                             style="padding-left:50px; margin-bottom: 25px;
                             margin-top: 30px;">
                                 {{loginCtrl.er_non_field_errors}}
                             </p>
-
                         </div>
+                        
                         <div class="col-sm-12 controls" style="padding-left:50px;">
                             <input type="submit" value="Login" class="btn
                             btn-success" />
                             <a href="#" ng-click="loginCtrl.swapForm()" class="btn btn-info">Sign Up</a>
                         </div>
+                    
                     </form>
+
                 </div>
             </div>
         </div><!-- login div ends here -->
 
-
-        <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform' &&
-        loginCtrl.notReg"
-        class="mainbox">
+        <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform' && loginCtrl.notReg">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                <div class="panel-title">Sign Up</div>
+                    <div class="panel-title">Sign Up</div>
                 </div>
                 <div class="panel-body">
-                    <form id="signupform" ng-submit="loginCtrl.submitRegister()" class="form-horizontal" role="form">
+                    
+                    <form id="signupform" ng-submit="loginCtrl.register()" class="form-horizontal" role="form">
 
-                        <div class="form-group" ng-class="{'has-warning':
-                            loginCtrl.er_reg_username}">
+                        <div class="form-group" ng-class="{'has-warning':loginCtrl.er_reg_username}">
                             <label for="username" class="col-md-2 control-label">Username*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_username" type="text" class="form-control" name="username" placeholder="Username">
@@ -77,49 +69,53 @@
                             <div class="col-md-2"></div>
                             <div class="help-block col-md-10"
                             ng-show="loginCtrl.er_reg_username">
-                            {{loginCtrl.er_reg_username}}
+                                {{loginCtrl.er_reg_username}}
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="fname" class="col-md-2 control-label">First Name</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_fname" type="text" class="form-control" name="fname" placeholder="John">
                             </div>
                         </div>
+
                         <div class="form-group">
                             <label for="lname" class="col-md-2 control-label">Last Name</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_lname" type="text" class="form-control" name="lname" placeholder="Doe">
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-warning':
-                            loginCtrl.er_reg_email}">
+
+                        <div class="form-group" ng-class="{'has-warning':loginCtrl.er_reg_email}">
                             <label for="email" class="col-md-2 control-label">Email*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_email" type="text" class="form-control" name="email" placeholder="example@example.com">
                             </div>
                             <div class="col-md-2"></div>
-                            <div class="help-block col-md-10 "
-                            ng-show="loginCtrl.er_reg_email">
-                            {{loginCtrl.er_reg_email}}
+                            <div class="help-block col-md-10" ng-show="loginCtrl.er_reg_email">
+                                {{loginCtrl.er_reg_email}}
                             </div>
                         </div>
-                        <div class="form-group" ng-class="{'has-warning':
-                            loginCtrl.er_reg_password}">
+
+                        <div class="form-group" ng-class="{'has-warning':loginCtrl.er_reg_password}">
                             <label for="password" class="col-md-2 control-label">Password*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_password" type="password" class="form-control" name="password" placeholder="*****">
                             </div>
                             <div class="col-md-2"></div>
-                            <div class="help-block col-md-10"
-                            ng-show="loginCtrl.er_reg_password">{{loginCtrl.er_reg_password}}
+                            <div class="help-block col-md-10" ng-show="loginCtrl.er_reg_password">
+                                {{loginCtrl.er_reg_password}}
                             </div>
                         </div>
+
                         <div class="col-sm-12 controls" style="padding-left:100px;">
                             <input type="submit" value="Register" class="btn btn-success" />
                             <a href="#" ng-click="loginCtrl.swapForm()" class="btn btn-info">Login</a>
                         </div>
+
                     </form>
+
                 </div>
 
             </div>
