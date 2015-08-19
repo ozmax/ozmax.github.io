@@ -3,6 +3,8 @@ angular.module('link-app').controller('LoginController',['authService', '$locati
     register_url = base_url + '/auth/register/'
     login_url = base_url + "/auth/login/";
     this.notReg = true;
+    this.loginUsername = '';
+    this.loginPassword = '';
     this_ = this;
 
     loginFields = ['username', 'password', 'non_field_errors'];
