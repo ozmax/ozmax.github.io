@@ -16,7 +16,10 @@ label{
     color:lime;
 }
 .table .dropdown-menu a:visited{
-    color:lime;
+    color:black;
+    background-color:yellow;
 }
-.checked{
+.checked1{
+    background-color:lime;
+    color:white;
 }

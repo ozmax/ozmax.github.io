@@ -1,8 +1,10 @@
 angular.module('link-app').controller('LinksController',[ 'authService', '$http',
 function(authService, $http){
     this_ = this;
-    url = "http://ozmaxplanet.com:8000/links/"
-    headers = {'Authorization': "Token " + authService.auth_token};
+    links_url = "http://ozmaxplanet.com:8000/links/"
+    headers = {
+        'Authorization': "Token " + authService.auth_token,
+        };
     this.showForm = true;
     this_ = this;
 
@@ -29,10 +31,22 @@ function(authService, $http){
         }
     };
 
+    this.catsInString = function(){
+        categories_string = [];
+        for (var i=0; i<this.selectedItems.length; i++){
+            //categories_string = categories_string+this.selectedItems[i]+",";
+            categories_string.push(parseInt(this.selectedItems[i]));
+        }
+        //var str = categories_string.slice(-1);
+        //if (str == ","){
+        //   categories_string = categories_string.slice(0,-1); 
+        //}
+        return categories_string;
+    };
     // --- * ---
 
     this.getLinks = function(){
-        $http.get(url, {'headers': headers}).
+        $http.get(links_url, {'headers': headers}).
             then(function(response){
                 this_.links = response.data;
             },
@@ -52,12 +66,20 @@ function(authService, $http){
             });
     }
 
+
     this.submitLink = function(){
-        data = {
+        //categories = "1,2"//this.catsInString();
+        var data = {
             'url': this.reg_url,
-            'categories': this.reg_categories
         };    
         console.log(data);
+        $http.post(links_url, data, {'headers': headers}).
+            then(function(response){
+                console.log(response);
+            },
+            function(response){
+                console.log(response);
+            });
     };
 
     this.getLinks();

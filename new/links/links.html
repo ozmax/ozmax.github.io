@@ -28,6 +28,12 @@
                    
  
                 </td>
+                <td>
+                    <button class="btn btn-xs btn-success"
+                    ng-click="lCtrl.submitLink()">
+                        OK
+                    </button>
+                </td>
             </tr>
             <tr ng-repeat="link in lCtrl.links">
                 <td>{{link.url}}</td>
