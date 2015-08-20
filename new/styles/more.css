@@ -9,3 +9,14 @@
 label{
     font-size: 14px;
 }
+.table .dropdown-menu {
+    background-color:yellow;
+}
+.table .dropdown-menu a{
+    color:lime;
+}
+.table .dropdown-menu a:visited{
+    color:lime;
+}
+.checked{
+}

@@ -6,6 +6,31 @@ function(authService, $http){
     this.showForm = true;
     this_ = this;
 
+    //--- dropdown mechs ---
+    this.selectedItems = [];
+    this.clickItem = function(id){
+        pos = this.selectedItems.indexOf(id);
+        if (pos > -1) {
+            this.selectedItems.splice(pos, 1);
+        }
+        else{
+            this.selectedItems.push(id);
+        }
+        console.log(this.selectedItems);
+    };
+
+    this.isChecked = function(id){
+        pos = this.selectedItems.indexOf(id);
+        if (pos > -1) {
+            return true;
+        }
+        else{
+            return false;
+        }
+    };
+
+    // --- * ---
+
     this.getLinks = function(){
         $http.get(url, {'headers': headers}).
             then(function(response){
