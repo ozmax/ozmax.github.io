@@ -1,19 +1,28 @@
-<div id="links-wrapper">
-    <div class="page-header" style="padding-top:150px; width: 600px; margin: 0 auto;">
-        <table class="table table-striped">
-            <caption class="text-info">Links</caption>
-            <thead>
-                <tr>
-                    <th>URL</th><th>Categories</th><th>Entry Date</th>
-                </tr>
-            </thead>
-            <tbody> 
-            <tr ng-show="lCtrl.showForm">
-                <td>
-                    <input type="text" ng-model="lCtrl.reg_url">
-                </td>
-                <td>
-
+<div id="links-wrapper" class="container-fluid" style="width:900px;">
+<div class="row">
+    <div class="col-md-9">
+        <div class="page-header" style="padding-top:150px; width: 600px; margin: 0 auto;">
+            <table class="table table-striped">
+                <caption class="text-info">
+                    Links 
+                    <button ng-hide="lCtrl.showLinkForm" class="btn btn-success btn-xs" ng-click="lCtrl.swapForm('showLinkForm')">
+                        Add Link
+                    </button>
+                    <button ng-show="lCtrl.showLinkForm" class="btn btn-danger btn-xs" ng-click="lCtrl.swapForm('showLinkForm')">
+                        Cancel 
+                    </button>
+                </caption>
+                    <thead>
+                    <tr>
+                        <th>URL</th><th>Categories</th><th>Entry Date</th>
+                    </tr>
+                    </thead>
+                    <tbody> 
+                        <tr ng-show="lCtrl.showLinkForm">
+                            <td>
+                            <input type="text" ng-model="lCtrl.reg_url">
+                        </td>
+<td>
 <div class='btn-group' ng-class='{open: open}'>
     <button class='btn btn-xs btn-info dropdown-toggle' data-ng-click='open=!open;openDropdown()'>Categories<span class='caret'></span></button>
     <ul class='dropdown-menu' aria-labelledby='dropdownMenu'>
@@ -25,30 +34,59 @@
         </li>
     </ul>
 </div>    
-                   
- 
-                </td>
-                <td>
-                    <button class="btn btn-xs btn-success"
-                    ng-click="lCtrl.submitLink()">
-                        OK
-                    </button>
-                </td>
-            </tr>
-            <tr ng-repeat="link in lCtrl.links">
-                <td>{{link.url}}</td>
-                <td>
-                    <div ng-repeat="category in link.categories">
-                    <span class="label label-warning" style="color:black;" >
-                        {{category.name}}
-                    </span>&nbsp;
-                    </div>
-                </td>
-                <td>{{link.entry_date|date}}</td>
-            </tr>
-            </tbody>
-        </form>
+</td>
+                            <td>
+                                <button class="btn btn-xs btn-success" ng-click="lCtrl.submitLink()">
+                                    OK
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="link in lCtrl.links">
+                            <td>{{link.url}}</td>
+                            <td>
+                                <div ng-repeat="category in link.categories">
+                                    <span class="label label-warning" style="color:black;" >
+                                        {{category.name}}
+                                    </span>&nbsp;
+                                </div>
+                            </td>
+                            <td>{{link.entry_date|date}}</td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
     </div>
+    <div class="col-md-3">
+        <div style="padding-top:150px">
+            <table class="table table-striped">
+                <caption class="text-info">
+                    Categories
 
-    <script src="dropdown_code.js"></script>
+                    <button ng-hide="lCtrl.showCatForm" class="btn btn-success
+                    btn-xs" ng-click="lCtrl.swapForm('showCatForm')">
+                        Add Category
+                    </button>
+                    <button ng-show="lCtrl.showCatForm" class="btn btn-danger
+                    btn-xs" ng-click="lCtrl.swapForm('showCatForm')">
+                        Cancel 
+                    </button>
+                </caption>
+                
+                <tr ng-show="lCtrl.showCatForm">
+                    <td>
+                        <input type="text" placeholder="category name"
+                        ng-model="lCtrl.categoryName">
+                        <button class="btn btn-xs btn-success"
+                        ng-click="lCtrl.submitCategory()">
+                            OK
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-repeat="category in lCtrl.categories">
+                    <td>{{category.name}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
 </div>

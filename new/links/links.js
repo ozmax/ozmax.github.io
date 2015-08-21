@@ -1,14 +1,24 @@
 angular.module('link-app').controller('LinksController',[ 'authService',
 '$http', function(authService, $http){
     this_ = this;
-    this.reg_url = "http://foo.gr";
     links_url = "http://ozmaxplanet.com:8000/links/"
     headers = {
         'Authorization': "Token " + authService.auth_token,
         'Content-Type': 'application/json'
         };
-    this.showForm = true;
     this_ = this;
+    this.showLinkForm = false;
+    this.showCatForm = false;
+    
+    this.swapForm = function(theForm){
+        console.log(theForm)
+        if (this[theForm] == false){
+            this[theForm] = true;
+        }    
+        else{
+            this[theForm] = false;
+        }
+    };
 
     //--- dropdown mechs ---
     this.selectedItems = [];
@@ -75,6 +85,21 @@ angular.module('link-app').controller('LinksController',[ 'authService',
             },
             function(response){
                 console.log(response);
+            });
+    };
+    
+    this.submitCategory = function(){
+        data = {
+            'name': this.categoryName
+        };
+        $http.post(cat_url, data, {'headers': headers}).
+            then(function(response){
+                console.log(response);
+                this_.getCategories();
+            },
+            function(response){
+                console.log(response);
+                this_.getCategories();
             });
     };
 
