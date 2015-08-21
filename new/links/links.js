@@ -1,9 +1,11 @@
-angular.module('link-app').controller('LinksController',[ 'authService', '$http',
-function(authService, $http){
+angular.module('link-app').controller('LinksController',[ 'authService',
+'$http', function(authService, $http){
     this_ = this;
+    this.reg_url = "http://foo.gr";
     links_url = "http://ozmaxplanet.com:8000/links/"
     headers = {
         'Authorization': "Token " + authService.auth_token,
+        'Content-Type': 'application/json'
         };
     this.showForm = true;
     this_ = this;
@@ -18,7 +20,6 @@ function(authService, $http){
         else{
             this.selectedItems.push(id);
         }
-        console.log(this.selectedItems);
     };
 
     this.isChecked = function(id){
@@ -31,17 +32,12 @@ function(authService, $http){
         }
     };
 
-    this.catsInString = function(){
-        categories_string = [];
+    this.categoriesToJson = function(){
+        categoriesJSON = [];
         for (var i=0; i<this.selectedItems.length; i++){
-            //categories_string = categories_string+this.selectedItems[i]+",";
-            categories_string.push(parseInt(this.selectedItems[i]));
+            categoriesJSON.push(this.selectedItems[i].toString());
         }
-        //var str = categories_string.slice(-1);
-        //if (str == ","){
-        //   categories_string = categories_string.slice(0,-1); 
-        //}
-        return categories_string;
+        return categoriesJSON;
     };
     // --- * ---
 
@@ -66,16 +62,16 @@ function(authService, $http){
             });
     }
 
-
     this.submitLink = function(){
-        //categories = "1,2"//this.catsInString();
+        categories = this.categoriesToJson();
         var data = {
             'url': this.reg_url,
+            'categories': categories
         };    
-        console.log(data);
         $http.post(links_url, data, {'headers': headers}).
             then(function(response){
                 console.log(response);
+                this_.getLinks();
             },
             function(response){
                 console.log(response);
