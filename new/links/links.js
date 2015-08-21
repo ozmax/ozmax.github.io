@@ -63,11 +63,16 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     
     cat_url = "http://ozmaxplanet.com:8000/categories/";
     this.getCategories = function(){
+        headers = {
+            'Authorization': "Token " + authService.auth_token,
+            };
         $http.get(cat_url, {'headers': headers}).
             then(function(response){
                 this_.categories = response.data;
+                console.log(response)
             },
             function(response){
+                console.log(response)
             
             });
     }
