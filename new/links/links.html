@@ -37,7 +37,13 @@
             </tr>
             <tr ng-repeat="link in lCtrl.links">
                 <td>{{link.url}}</td>
-                <td></td>
+                <td>
+                    <div ng-repeat="category in link.categories">
+                    <span class="label label-warning" style="color:black;" >
+                        {{category.name}}
+                    </span>&nbsp;
+                    </div>
+                </td>
                 <td>{{link.entry_date|date}}</td>
             </tr>
             </tbody>
