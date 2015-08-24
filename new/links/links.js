@@ -2,6 +2,7 @@ angular.module('link-app').controller('LinksController',[ 'authService',
 '$http', function(authService, $http){
     this_ = this;
     links_url = "http://ozmaxplanet.com:8000/links/"
+    cat_url = "http://ozmaxplanet.com:8000/categories/";
     headers = {
         'Authorization': "Token " + authService.auth_token,
         'Content-Type': 'application/json'
@@ -21,6 +22,19 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     };
 
     //--- dropdown mechs ---
+    this.menuOpen = false;
+    this.closeMenu = function(){
+        this.menuOpen = false;
+    };
+    this.swapMenu = function(){
+        if (this.menuOpen == false ){
+            this.menuOpen = true;
+        }
+        else{
+            this.menuOpen = false;
+        }
+    };
+
     this.selectedItems = [];
     this.clickItem = function(id){
         pos = this.selectedItems.indexOf(id);
@@ -61,7 +75,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
             });
     };
     
-    cat_url = "http://ozmaxplanet.com:8000/categories/";
     this.getCategories = function(){
         headers = {
             'Authorization': "Token " + authService.auth_token,
