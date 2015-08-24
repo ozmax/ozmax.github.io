@@ -10,7 +10,11 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     this_ = this;
     this.showLinkForm = false;
     this.showCatForm = false;
-    
+
+    //--- dropdown mechs ---
+    this.menuOpen = false;
+    this.selectedItems = [];
+
     this.swapForm = function(theForm){
         console.log(theForm)
         if (this[theForm] == false){
@@ -21,11 +25,10 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         }
     };
 
-    //--- dropdown mechs ---
-    this.menuOpen = false;
     this.closeMenu = function(){
         this.menuOpen = false;
     };
+
     this.swapMenu = function(){
         if (this.menuOpen == false ){
             this.menuOpen = true;
@@ -35,7 +38,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         }
     };
 
-    this.selectedItems = [];
     this.clickItem = function(id){
         pos = this.selectedItems.indexOf(id);
         if (pos > -1) {
@@ -54,14 +56,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         else{
             return false;
         }
-    };
-
-    this.categoriesToJson = function(){
-        categoriesJSON = [];
-        for (var i=0; i<this.selectedItems.length; i++){
-            categoriesJSON.push(this.selectedItems[i].toString());
-        }
-        return categoriesJSON;
     };
     // --- * ---
 
@@ -91,10 +85,9 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     }
 
     this.submitLink = function(){
-        categories = this.categoriesToJson();
         var data = {
             'url': this.reg_url,
-            'categories': categories
+            'categories': this.selectedItems
         };    
         $http.post(links_url, data, {'headers': headers}).
             then(function(response){
