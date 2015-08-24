@@ -16,7 +16,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     this.selectedItems = [];
 
     this.swapForm = function(theForm){
-        console.log(theForm)
         if (this[theForm] == false){
             this[theForm] = true;
         }    
@@ -76,7 +75,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         $http.get(cat_url, {'headers': headers}).
             then(function(response){
                 this_.categories = response.data;
-                console.log(response)
             },
             function(response){
                 console.log(response)
@@ -91,7 +89,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         };    
         $http.post(links_url, data, {'headers': headers}).
             then(function(response){
-                console.log(response);
                 this_.getLinks();
             },
             function(response){
@@ -105,7 +102,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         };
         $http.post(cat_url, data, {'headers': headers}).
             then(function(response){
-                console.log(response);
                 this_.getCategories();
             },
             function(response){
