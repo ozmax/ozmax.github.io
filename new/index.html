@@ -1,13 +1,17 @@
 <html>
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/more.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/more.css">
 </head>
 
 <body ng-app="link-app">
+    <div class="well well-bg" style="background-color:;width:960px;
+    margin: 0 auto; margin-top:70px;">
     <navbar-element></navbar-element>
     <div ng-view></div>
+    </div>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.js"></script>
     <script src="https://code.angularjs.org/1.4.3/angular-cookies.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-route.js"></script>

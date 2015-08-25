@@ -1,64 +1,100 @@
-<div id="links-wrapper" class="container-fluid" style="width:900px;">
+<div id="links-wrapper" class="container-fluid" style="">
 <div class="row">
     <div class="col-md-9">
-        <div class="page-header" style="padding-top:150px; width: 600px; margin: 0 auto;">
-            <table class="table table-striped">
-                <caption class="text-info">
-                    Links 
-                    <button ng-hide="lCtrl.showLinkForm" class="btn btn-success btn-xs" ng-click="lCtrl.swapForm('showLinkForm')">
-                        Add Link
-                    </button>
-                    <button ng-show="lCtrl.showLinkForm" class="btn btn-danger btn-xs" ng-click="lCtrl.swapForm('showLinkForm')">
-                        Cancel 
-                    </button>
-                </caption>
-                    <thead>
-                    <tr>
-                        <th>URL</th><th>Categories</th><th>Entry Date</th>
-                    </tr>
-                    </thead>
-                    <tbody> 
-                        <tr ng-show="lCtrl.showLinkForm">
-                            <td>
-                            <input type="text" ng-model="lCtrl.reg_url">
-                        </td>
+        <div id="toolbar">
+            <div class="btn-toolbar">
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-default" href="">
+                        <i class="fa fa-plus-circle text-success"></i>
+                    </a>
+                    <a class="btn btn-default" href="">
+                        <i class="fa fa-pencil text-warning"></i>
+                    </a>
+                    <a class="btn btn-default" href="">
+                        <i class="fa fa-minus-circle text-danger"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-striped">
+        <caption>
+        </caption>
+                <!--
+            <caption class="text-info">
+                Links 
+                <button ng-hide="lCtrl.showLinkForm" class="btn btn-success btn-xs" ng-click="lCtrl.swapForm('showLinkForm')">
+                    Add Link
+                </button>
+                <button ng-show="lCtrl.showLinkForm" class="btn btn-danger btn-xs" ng-click="lCtrl.swapForm('showLinkForm')">
+                    Cancel 
+                </button>
+            </caption>
+            -->
+                <thead>
+                <tr>
+                    <th>URL</th><th>Categories</th><th>Entry Date</th>
+                </tr>
+                </thead>
+                <tbody> 
+                    <tr ng-show="lCtrl.showLinkForm">
+                        <td>
+                        <input type="text" ng-model="lCtrl.reg_url">
+                    </td>
 <td>
 <div class='btn-group' ng-class='{open: lCtrl.menuOpen}' body-click="lCtrl.closeMenu()">
-    <button class='btn btn-xs btn-info' ng-click='lCtrl.swapMenu()'>Categories<span class='caret'></span></button>
-    <ul class='dropdown dropdown-menu' aria-labelledby='dropdownMenu'>
-        <li ng-repeat="cat in lCtrl.categories">
-            <a href="" ng-click="lCtrl.clickItem(cat.id)">
-                {{cat.name}}
-                <i class="fa fa-check pull-right" ng-show="lCtrl.isChecked(cat.id)"></i>
-            </a>
-        </li>
-    </ul>
+<button class='btn btn-xs btn-info' ng-click='lCtrl.swapMenu()'>Categories<span class='caret'></span></button>
+<ul class='dropdown dropdown-menu' aria-labelledby='dropdownMenu'>
+    <li ng-repeat="cat in lCtrl.categories">
+        <a href="" ng-click="lCtrl.clickItem(cat.id)">
+            {{cat.name}}
+            <i class="fa fa-check pull-right" ng-show="lCtrl.isChecked(cat.id)"></i>
+        </a>
+    </li>
+</ul>
 </div>    
 </td>
-                            <td>
-                                <button class="btn btn-xs btn-success" ng-click="lCtrl.submitLink()">
-                                    OK
-                                </button>
-                            </td>
-                        </tr>
-                        <tr ng-repeat="link in lCtrl.links">
-                            <td>{{link.url}}</td>
-                            <td>
-                                <div ng-repeat="category in link.categories">
-                                    <span class="label label-warning" style="color:black;" >
-                                        {{category.name}}
-                                    </span>&nbsp;
-                                </div>
-                            </td>
-                            <td>{{link.entry_date|date}}</td>
-                        </tr>
-                    </tbody>
-            </table>
-        </div>
+                        <td>
+                            <button class="btn btn-xs btn-success" ng-click="lCtrl.submitLink()">
+                                OK
+                            </button>
+                        </td>
+                    </tr>
+                    <tr ng-repeat="link in lCtrl.links">
+                        <td>{{link.url}}</td>
+                        <td>
+                            <div ng-repeat="category in link.categories">
+                                <span class="label label-warning" style="color:black;" >
+                                    {{category.name}}
+                                </span>&nbsp;
+                            </div>
+                        </td>
+                        <td>{{link.entry_date|date}}</td>
+                    </tr>
+                </tbody>
+
+        </table>
     </div>
     <div class="col-md-3">
-        <div style="padding-top:150px">
+        <div id="toolbar">
+            <div class="btn-toolbar">
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-default" href="">
+                        <i class="fa fa-plus-circle text-success"></i>
+                    </a>
+                    <a class="btn btn-default" href="">
+                        <i class="fa fa-pencil text-warning"></i>
+                    </a>
+                    <a class="btn btn-default" href="">
+                        <i class="fa fa-minus-circle text-danger"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
             <table class="table table-striped">
+        <caption>
+        </caption>
+                <!--
                 <caption class="text-info">
                     Categories
 
@@ -71,7 +107,13 @@
                         Cancel 
                     </button>
                 </caption>
-                
+                -->
+                <thead>
+                <tr>
+                    <th>Categories</th>
+                </tr>
+                <thead>
+                <tbody>
                 <tr ng-show="lCtrl.showCatForm">
                     <td>
                         <input type="text" placeholder="category name"
@@ -85,8 +127,8 @@
                 <tr ng-repeat="category in lCtrl.categories">
                     <td>{{category.name}}</td>
                 </tr>
+                </tbody>
             </table>
-        </div>
     </div>
 </div>
 </div>
