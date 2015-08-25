@@ -3,17 +3,12 @@
     <div class="col-md-9">
         <div id="toolbar">
             <div class="btn-toolbar">
-                <div class="btn-group">
-                    <a class="btn btn-default" href="">
+                    <a class="btn btn-lg btn-default" href="">
                         <i class="fa fa-plus-circle text-success"></i>
                     </a>
-                    <a class="btn btn-default" href="">
-                        <i class="fa fa-pencil text-warning"></i>
-                    </a>
-                    <a class="btn btn-default" href="">
+                    <a class="btn btn-lg btn-default" href="">
                         <i class="fa fa-minus-circle text-danger"></i>
                     </a>
-                </div>
             </div>
         </div>
         <table class="table table-striped">
@@ -32,7 +27,7 @@
             -->
                 <thead>
                 <tr>
-                    <th>URL</th><th>Categories</th><th>Entry Date</th>
+                    <th></th><th>URL</th><th>Categories</th><th>Date</th>
                 </tr>
                 </thead>
                 <tbody> 
@@ -60,6 +55,21 @@
                         </td>
                     </tr>
                     <tr ng-repeat="link in lCtrl.links">
+                        <td>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon">
+                                <input type="checkbox">
+                            </span>
+                            <span class="input-group-btn">
+                                <a class="btn btn-sm btn-default">
+                                    <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i> 
+                                </a>
+                                <a class="btn btn-sm btn-default">
+                                    <i style="padding-top: 3px;" class="fa fa-minus-circle text-danger"></i> 
+                                </a>
+                            </span>
+                           </div>
+                        </td>
                         <td>{{link.url}}</td>
                         <td>
                             <div ng-repeat="category in link.categories">
@@ -77,17 +87,12 @@
     <div class="col-md-3">
         <div id="toolbar">
             <div class="btn-toolbar">
-                <div class="btn-group btn-group-justified">
-                    <a class="btn btn-default" href="">
+                    <a class="btn btn-lg btn-default" href="">
                         <i class="fa fa-plus-circle text-success"></i>
                     </a>
-                    <a class="btn btn-default" href="">
-                        <i class="fa fa-pencil text-warning"></i>
-                    </a>
-                    <a class="btn btn-default" href="">
+                    <a class="btn btn-lg  btn-default" href="">
                         <i class="fa fa-minus-circle text-danger"></i>
                     </a>
-                </div>
             </div>
         </div>
 
@@ -125,6 +130,21 @@
                     </td>
                 </tr>
                 <tr ng-repeat="category in lCtrl.categories">
+                    <td>
+<div class="input-group input-group-sm">
+                            <span class="input-group-addon">
+                                <input type="checkbox">
+                            </span>
+                            <span class="input-group-btn">
+                                <a class="btn btn-sm btn-default">
+                                    <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i> 
+                                </a>
+                                <a class="btn btn-sm btn-default">
+                                    <i style="padding-top: 3px;" class="fa fa-minus-circle text-danger"></i> 
+                                </a>
+                            </span>
+                           </div>
+                    </td>
                     <td>{{category.name}}</td>
                 </tr>
                 </tbody>
