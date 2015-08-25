@@ -1,8 +1,7 @@
-<div id="links-wrapper">
-    <div class="page-header" style="padding-top:150px; width: 600px; margin: 0 auto;">
+<div id="links-wrapper" style="width: 600px; margin: 0 auto; margin-top:180px;">
 
         <div id="loginbox" ng-show="loginCtrl.currentForm == 'loginform'">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">Sign In</div>
                 </div>
@@ -17,7 +16,8 @@
                                 </span>
                                 <input ng-model="loginCtrl.loginUsername" type="text" class="form-control" placeholder="username">
                             </div>
-                            <p ng-show="loginCtrl.er_username" class="help-block text-warning" style="padding-left:50px;">
+                            <p ng-show="loginCtrl.er_username"
+                            class="help-block text-danger" style="padding-left:50px;">
                                 {{loginCtrl.er_username}}
                             </p>
                         </div>
@@ -53,7 +53,7 @@
         </div><!-- login div ends here -->
 
         <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform' && loginCtrl.notReg">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">Sign Up</div>
                 </div>
@@ -61,7 +61,7 @@
                     
                     <form id="signupform" ng-submit="loginCtrl.register()" class="form-horizontal" role="form">
 
-                        <div class="form-group" ng-class="{'has-warning':loginCtrl.er_reg_username}">
+                        <div class="form-group" ng-class="{'has-error':loginCtrl.er_reg_username}">
                             <label for="username" class="col-md-2 control-label">Username*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_username" type="text" class="form-control" name="username" placeholder="Username">
@@ -87,7 +87,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" ng-class="{'has-warning':loginCtrl.er_reg_email}">
+                        <div class="form-group" ng-class="{'has-error':loginCtrl.er_reg_email}">
                             <label for="email" class="col-md-2 control-label">Email*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_email" type="text" class="form-control" name="email" placeholder="example@example.com">
@@ -98,7 +98,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" ng-class="{'has-warning':loginCtrl.er_reg_password}">
+                        <div class="form-group" ng-class="{'has-error':loginCtrl.er_reg_password}">
                             <label for="password" class="col-md-2 control-label">Password*</label>
                             <div class="col-md-10">
                                 <input ng-model="loginCtrl.reg_password" type="password" class="form-control" name="password" placeholder="*****">
@@ -129,5 +129,4 @@
         </div>
 
 
-    </div><!-- page header ends here -->
 </div>

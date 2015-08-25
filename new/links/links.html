@@ -54,20 +54,23 @@
                             </button>
                         </td>
                     </tr>
-                    <tr ng-repeat="link in lCtrl.links">
+                    <tr ng-repeat="link in lCtrl.links" class="hoveror">
                         <td>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon">
-                                <input type="checkbox">
+                            <div class="input-group input-group-sm">
+                            <span class="input-group-btn">
+                            <input type="checkbox">
                             </span>
+                            <div class="hiddenActions hoveror"
+                            style="width:10px;">
                             <span class="input-group-btn">
                                 <a class="btn btn-sm btn-default">
-                                    <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i> 
+                                    <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i>
                                 </a>
                                 <a class="btn btn-sm btn-default">
-                                    <i style="padding-top: 3px;" class="fa fa-minus-circle text-danger"></i> 
+                                    <i style="padding-top: 3px;" class="fa fa-minus-circle text-danger"></i>
                                 </a>
                             </span>
+                            </div>
                            </div>
                         </td>
                         <td>{{link.url}}</td>
@@ -129,21 +132,27 @@
                         </button>
                     </td>
                 </tr>
-                <tr ng-repeat="category in lCtrl.categories">
+                <tr ng-repeat="category in lCtrl.categories" class="hoveror">
                     <td>
-<div class="input-group input-group-sm">
-                            <span class="input-group-addon">
-                                <input type="checkbox">
+    <div class="input-group input-group-sm">
+                            <span class="input-group-btn">
+                            <input type="checkbox">
                             </span>
+                            <div class="hiddenActions hoveror"
+                            style="width:10px;">
                             <span class="input-group-btn">
                                 <a class="btn btn-sm btn-default">
-                                    <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i> 
+                                    <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i>
                                 </a>
                                 <a class="btn btn-sm btn-default">
-                                    <i style="padding-top: 3px;" class="fa fa-minus-circle text-danger"></i> 
+                                    <i style="padding-top: 3px;" class="fa fa-minus-circle text-danger"></i>
                                 </a>
                             </span>
+                            </div>
                            </div>
+
+
+
                     </td>
                     <td>{{category.name}}</td>
                 </tr>

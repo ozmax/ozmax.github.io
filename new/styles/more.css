@@ -23,3 +23,11 @@ label{
     background-color:lime;
     color:white;
 }
+
+.hiddenActions{
+    display: none;
+}
+
+.hoveror:hover .hiddenActions{
+    display: block;
+}
