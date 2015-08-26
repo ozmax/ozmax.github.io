@@ -9,21 +9,24 @@
 label{
     font-size: 14px;
 }
+
+
+/* links page style */
+
 .table .dropdown-menu {
-    background-color:yellow;
+    background-color:white;
 }
+
 .table .dropdown-menu a{
     color:lime;
 }
 .table .dropdown-menu a:visited{
     color:black;
-    background-color:yellow;
+    background-color:white;
 }
 .checked1{
-    background-color:lime;
     color:white;
 }
-
 .hiddenActions{
     display: none;
 }
@@ -31,3 +34,5 @@ label{
 .hoveror:hover .hiddenActions{
     display: block;
 }
+
+/* --- * --- */

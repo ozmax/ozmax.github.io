@@ -11,9 +11,33 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     this.showLinkForm = false;
     this.showCatForm = false;
 
+    this.linksToDel = [];
+    this.catsToDel = [];
+
+    this.hasXToDel = function(X){
+        if (this[X+'ToDel'].length < 1){
+            return false;
+        }
+        else{
+            return true;
+        }
+    };
+
+    this.addXToDel = function(X, id){
+        pos = this[X+'ToDel'].indexOf(id);
+        if (pos > -1) {
+            this[X+'ToDel'].splice(pos, 1);
+        }
+        else{
+            this[X+'ToDel'].push(id);
+        }
+        console.log(this[X+'ToDel'])
+    }
+
     //--- dropdown mechs ---
     this.menuOpen = false;
-    this.selectedItems = [];
+    this.selectedCategories = [];
+    
 
     this.swapForm = function(theForm){
         if (this[theForm] == false){
@@ -38,17 +62,17 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     };
 
     this.clickItem = function(id){
-        pos = this.selectedItems.indexOf(id);
+        pos = this.selectedCategories.indexOf(id);
         if (pos > -1) {
-            this.selectedItems.splice(pos, 1);
+            this.selectedCategories.splice(pos, 1);
         }
         else{
-            this.selectedItems.push(id);
+            this.selectedCategories.push(id);
         }
     };
 
     this.isChecked = function(id){
-        pos = this.selectedItems.indexOf(id);
+        pos = this.selectedCategories.indexOf(id);
         if (pos > -1) {
             return true;
         }
@@ -85,11 +109,12 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     this.submitLink = function(){
         var data = {
             'url': this.reg_url,
-            'categories': this.selectedItems
+            'categories': this.selectedCategories
         };    
         $http.post(links_url, data, {'headers': headers}).
             then(function(response){
                 this_.getLinks();
+                this_.closeAndCleanLinkForm();
             },
             function(response){
                 console.log(response);
@@ -109,6 +134,12 @@ angular.module('link-app').controller('LinksController',[ 'authService',
                 this_.getCategories();
             });
     };
+
+    this.closeAndCleanLinkForm = function(){
+        this.reg_url = '';
+        this.selectedCategories = [];
+        this.showLinkForm = false;
+    }
 
     this.getLinks();
     this.getCategories(); 
