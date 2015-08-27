@@ -1,18 +1,20 @@
 angular.module('link-app').controller('LinksController',[ 'authService',
 '$http', function(authService, $http){
     this_ = this;
-    links_url = "http://ozmaxplanet.com:8000/links/"
+    base_url = "http://ozmaxplanet.com:8000/";
+    links_url = "http://ozmaxplanet.com:8000/links/";
     cat_url = "http://ozmaxplanet.com:8000/categories/";
     headers = {
         'Authorization': "Token " + authService.auth_token,
         'Content-Type': 'application/json'
         };
     this_ = this;
+    this.reg_url = 'http://foo.delete'
     this.showLinkForm = false;
     this.showCatForm = false;
 
     this.linksToDel = [];
-    this.catsToDel = [];
+    this.categoriesToDel = [];
 
     this.hasXToDel = function(X){
         if (this[X+'ToDel'].length < 1){
@@ -80,12 +82,51 @@ angular.module('link-app').controller('LinksController',[ 'authService',
             return false;
         }
     };
+
+    // --- * ---
+
+    // edit form mechs
+    this.editLinkCategories = [];
+    
+    this.populateLinkEditDropDown = function(id){
+        var link = '';
+        this.editLinkCategories= [];
+        for (var i=0; i<this_.links.length; i++){
+            console.log(i)
+            if (this.links[i].id == id){
+                link = this_.links[i];
+            }
+        }
+        if (link){
+            for (var i=0; i<link.categories.length; i++){
+                this.editLinkCategories.push(link.categories[i].id);
+            }
+        }
+    };
+
+    this.linkEditCheckedCategory = function(id){
+        var pos = this.editLinkCategories.indexOf(id);
+        if (pos > -1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    };
+    
+    this.currentLinkEdit = '';
+    this.swapLinkEditForm = function(id){
+        this.currentLinkEdit = id;
+        this.populateLinkEditDropDown(id);
+    };
+
     // --- * ---
 
     this.getLinks = function(){
         $http.get(links_url, {'headers': headers}).
             then(function(response){
                 this_.links = response.data;
+                console.log(response);
             },
             function(response){
                 console.log(response);
@@ -141,7 +182,29 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         this.showLinkForm = false;
     }
 
+    this.deleteXItems = function(X){
+        ids = this[X+'ToDel'];
+        for(var i=0; i<ids.length; i++){
+            delete_url = base_url + X + '/' + ids[i] + '/';
+            id = ids[i];
+            $http.delete(delete_url, {'headers': headers})
+                .then(function(response){
+                    for (var i=0; i<this_[X].length; i++){
+                        if (this_[X][i]['id'] == id) {
+                            pos = this_[X].indexOf(this_[X][i]);
+                            if (pos > -1) {
+                                this_[X].splice(pos, 1);
+                            }
+                        }
+                    }
+                },
+                function(response){
+                    console.log(response);
+                });
+        } 
+        this.linksToDel = [];
+    };
+
     this.getLinks();
     this.getCategories(); 
 }]);
-
