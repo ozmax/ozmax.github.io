@@ -9,7 +9,7 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         'Content-Type': 'application/json'
     };
     this_ = this;
-    this.reg_url = 'http://foo.delete'
+    this.reg_url = 'http://';
     this.showLinkForm = false;
     this.showCatForm = false;
 
@@ -152,7 +152,7 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         this.selectedCategories = [];
         this.showLinkForm = false;
     };
-    // -- end links ---
+    // --- end links ---
     
     // --- categories ---
     this.getCategories = function(){
@@ -182,9 +182,12 @@ angular.module('link-app').controller('LinksController',[ 'authService',
 
     // --- edit form mechs ---
     this.currentLinkEdit = '';
-    this.swapLinkEditForm = function(id){
-        this.currentLinkEdit = id;
-        this.populateLinkEditDropDown(id);
+    this.currentCategoryEdit = '';
+    this.swapXEditForm = function(X, id){
+        this['current'+X+'Edit'] = id;
+        if (X == 'Link'){
+            this.populateLinkEditDropDown(id);
+        }
     };
     // --- end edit form mechs ---
     
