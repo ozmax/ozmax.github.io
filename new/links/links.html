@@ -50,7 +50,7 @@
             </thead>
             <tbody> 
                 <tr ng-repeat="link in lCtrl.links" class="hoveror">
-                    <td>
+                    <td class="col-md-1">
                         <div class="input-group input-group-sm" style="max-width:30px; min-height: 27px;"
                         ng-hide="lCtrl.currentLinkEdit == link.id">
                             <span class="input-group-btn">
@@ -72,13 +72,13 @@
                             </a>
                         </div>
                     </td>
-                    <td>
+                    <td class="col-md-8">
                         <div ng-hide="lCtrl.currentLinkEdit == link.id">{{link.url}}</div>
                         <div ng-show="lCtrl.currentLinkEdit == link.id">
                         <input type="text" class="form-control" value="{{link.url}}">
                         </div>
                     </td>
-                    <td>
+                    <td class="col-md-1">
                         <div ng-repeat="category in link.categories" ng-hide="lCtrl.currentLinkEdit == link.id">
                             <span class="label label-primary" style="color:black;" >
                                 {{category.name}}
@@ -99,10 +99,16 @@
                                 </li>
                             </ul>
                             </div>
+                        </div>
+                    </td>
+                    <td class="col-md-2">
+                        <div ng-hide="lCtrl.currentLinkEdit == link.id">
+                            {{link.entry_date|date}}
+                        </div>
+                        <div ng-show="lCtrl.currentLinkEdit == link.id">
                             <a class="btn btn-success">Update</a>
                         </div>
                     </td>
-                    <td>{{link.entry_date|date}}</td>
                 </tr>
             </tbody>
         </table>
