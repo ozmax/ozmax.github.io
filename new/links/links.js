@@ -152,6 +152,21 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         this.selectedCategories = [];
         this.showLinkForm = false;
     };
+
+    this.updateLink = function(id){
+        var data = {
+            'url': this.updatedUrl,
+            'categories': this.selectedEditCategories
+        };
+        var url = links_url + id + '/';
+        $http.put(url, data, {'headers': headers}).
+            then(function(response){
+                console.log(response);
+            },
+            function(response){
+                console.log(response);
+            });
+    };
     // --- end links ---
     
     // --- categories ---
@@ -180,13 +195,22 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     };
     // --- end categories ---
 
-    // --- edit form mechs ---
+    // --- common edit form mechs ---
     this.currentLinkEdit = '';
     this.currentCategoryEdit = '';
     this.swapXEditForm = function(X, id){
         this['current'+X+'Edit'] = id;
         if (X == 'Link'){
+            this.selectedEditCategories= []; // refine all this blurgh
             this.populateLinkEditDropDown(id);
+            var link = '';
+            for (var i=0; i<this.links.length; i++){
+                if (this.links[i].id == id){
+                    link = this.links[i]
+                    this.updatedUrl = link.url;
+                }
+        }
+            
         }
     };
     // --- end edit form mechs ---
