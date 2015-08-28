@@ -50,14 +50,8 @@ angular.module('link-app').controller('LinksController',[ 'authService',
             return false;
         }
     };
-    this.populateLinkEditDropDown = function(id){
-        var link = '';
+    this.populateLinkEditDropDown = function(link){
         this.selectedEditCategories= [];
-        for (var i=0; i<this.links.length; i++){
-            if (this.links[i].id == id){
-                link = this.links[i];
-            }
-        }
         if (link){
             for (var i=0; i<link.categories.length; i++){
                 this.selectedEditCategories.push(link.categories[i].id);
@@ -122,6 +116,14 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     // --- end common functions for link and category---
 
     // --- links ---
+    this.getLinkById = function(id){
+        for (var i=0; i<this.links.length; i++){
+            if (this.links[i].id == id){
+                return this.links[i];
+            }
+        } 
+    };
+
     this.getLinks = function(){
         $http.get(links_url, {'headers': headers}).
             then(function(response){
@@ -161,7 +163,8 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         var url = links_url + id + '/';
         $http.put(url, data, {'headers': headers}).
             then(function(response){
-                console.log(response);
+                this_.getLinks();
+                this_.currentLinkEdit = '';
             },
             function(response){
                 console.log(response);
@@ -170,6 +173,13 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     // --- end links ---
     
     // --- categories ---
+    this.getCategoryById = function(id){
+        for (var i=0; i<this.categories.length; i++){
+            if (this.categories[i].id == id){
+                return this.categories[i];
+            }
+        } 
+    };
     this.getCategories = function(){
         headers = {'Authorization': "Token " + authService.auth_token};
         $http.get(cat_url, {'headers': headers}).
@@ -193,24 +203,37 @@ angular.module('link-app').controller('LinksController',[ 'authService',
                 console.log(response);
             });
     };
+
+    this.updateCategory = function(id){
+        data = {'name': this.updatedCategory};
+        url = cat_url + id + '/';
+        $http.put(url, data, {'headers': headers}).
+            then(function(response){
+                this_.getCategories();
+                this_.getLinks();
+                this_.currentCategoryEdit = '';
+            },
+            function(response){
+                console.log(response);
+            });
+    };
     // --- end categories ---
+
+    
 
     // --- common edit form mechs ---
     this.currentLinkEdit = '';
     this.currentCategoryEdit = '';
     this.swapXEditForm = function(X, id){
         this['current'+X+'Edit'] = id;
-        if (X == 'Link'){
-            this.selectedEditCategories= []; // refine all this blurgh
-            this.populateLinkEditDropDown(id);
-            var link = '';
-            for (var i=0; i<this.links.length; i++){
-                if (this.links[i].id == id){
-                    link = this.links[i]
-                    this.updatedUrl = link.url;
-                }
+        if (X == 'Link' && id){
+            var link = this.getLinkById(id)
+            this.updatedUrl = link.url;
+            this.populateLinkEditDropDown(link);
         }
-            
+        if (X == 'Category' && id){
+            category = this.getCategoryById(id);
+            this.updatedCategory = category.name;
         }
     };
     // --- end edit form mechs ---

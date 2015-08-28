@@ -191,11 +191,12 @@
                         </div>
                         <div ng-show="lCtrl.currentCategoryEdit == category.id">
                             <input type="text" class="form-control"
-                            value="{{category.name}}">
+                            ng-model="lCtrl.updatedCategory">
                         </div>
                     </td>
                     <td class="col-md-1"ng-show="lCtrl.currentCategoryEdit == category.id">
-                            <a class="btn btn-success">Update</a>
+                            <a class="btn btn-success"
+                            ng-click="lCtrl.updateCategory(category.id)">Update</a>
                     </td>
                 </tr>
             </tbody>
