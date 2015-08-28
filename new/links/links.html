@@ -30,9 +30,10 @@
                     </button>
                     <ul class='dropdown dropdown-menu' aria-labelledby='dropdownMenu'>
                         <li ng-repeat="cat in lCtrl.categories">
-                            <a href="" ng-click="lCtrl.clickItem(cat.id)">
+                            <a href="" ng-click="lCtrl.clickXCategory('', cat.id)">
                                 {{cat.name}}
-                                <i style="color:black;" class="fa fa-check pull-right" ng-show="lCtrl.isChecked(cat.id)"></i>
+                                <i style="color:black;" class="fa fa-check pull-right" 
+                                ng-show="lCtrl.isXChecked('', cat.id)"></i>
                             </a>
                         </li>
                     </ul>
@@ -88,13 +89,13 @@
                             <div class='btn-group' ng-class='{open: lCtrl.menuOpen}' body-click="lCtrl.closeMenu()">
                             <button class='btn btn-sm btn-info' ng-click='lCtrl.swapMenu()'>Categories<span class='caret'></span>
                             </button>
-                            <ul class='dropdown dropdown-menu' aria-labelledby='dropdownMenu'>
+                            <ul class='dropdown dropdown-menu'>
                                 <li ng-repeat="cat in lCtrl.categories">
-                                    <a href="" ng-click="lCtrl.clickItem(cat.id)">
+                                    <a href=""
+                                    ng-click="lCtrl.clickXCategory('Edit', cat.id)">
                                         {{cat.name}}
-                                        <i style="color:black;" class="fa
-                                        fa-check pull-right"
-                                        ng-show="lCtrl.linkEditCheckedCategory(cat.id)"></i>
+                                        <i style="color:black;" class="fa fa-check pull-right"
+                                        ng-show="lCtrl.isXChecked('Edit', cat.id)"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -130,56 +131,48 @@
                     <i class="fa fa-trash-o text-danger"></i>
                 </a>
             </div>
-
-            
         </div>
 
-            <table class="table table-striped">
-        <caption>
-            <form class="form form-inline well" ng-show="lCtrl.showCatForm">
-                <input class="form-control" type="text" placeholder="category name" ng-model="lCtrl.categoryName"
-                style="width:190px;">
-                <a class="btn btn-xs btn-success" ng-click="lCtrl.submitCategory()">
-                    OK
-                </a>
-            </form>
-            <hr>
-        </caption>
-                <thead>
+        <table class="table table-striped">
+            <caption>
+                <form class="form form-inline well" ng-show="lCtrl.showCatForm">
+                    <input class="form-control" type="text" placeholder="category name" ng-model="lCtrl.categoryName"
+                    style="width:190px;">
+                    <a class="btn btn-xs btn-success" ng-click="lCtrl.submitCategory()">
+                        OK
+                    </a>
+                </form>
+                <hr>
+            </caption>
+            <thead>
                 <tr>
                     <th>#</th><th>Categories</th>
                 </tr>
-                <thead>
-                <tbody>
+            </thead>
+            <tbody>
                 <tr ng-show="lCtrl.showCatForm">
                     <td>
                     </td>
                 </tr>
                 <tr ng-repeat="category in lCtrl.categories" class="hoveror">
                     <td style="width:20px; display:inline-block;">
-
-                            <div class="input-group input-group-sm" style="width:30px; min-height: 27px;">
+                        <div class="input-group input-group-sm" style="width:30px; min-height: 27px;">
                             <span class="input-group-btn">
                                 <input type="checkbox" ng-click="lCtrl.addXToDel('categories', category.id)">
                             </span>
-                                <div class="hiddenActions hoveror"
-                                style="width:10px; padding-left:2px;">
-                                    <span class="input-group">
-                                        <a class="btn btn-sm">
-                                            <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i>
-                                        </a>
-                                    </span>
-                                </div>
-                           </div>
-
-
-
-
+                            <div class="hiddenActions hoveror"  style="width:10px; padding-left:2px;">
+                                <span class="input-group">
+                                    <a class="btn btn-sm">
+                                        <i style="padding-top: 3px;" class="fa fa-pencil text-info"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
                     </td>
                     <td>{{category.name}}</td>
                 </tr>
-                </tbody>
-            </table>
+            </tbody>
+        </table>
     </div>
 </div>
 </div>
