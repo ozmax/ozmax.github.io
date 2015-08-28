@@ -184,9 +184,9 @@ angular.module('link-app').controller('LinksController',[ 'authService',
 
     this.deleteXItems = function(X){
         ids = this[X+'ToDel'];
-        for(var i=0; i<ids.length; i++){
-            delete_url = base_url + X + '/' + ids[i] + '/';
-            id = ids[i];
+        angular.forEach(ids, function(id){
+            delete_url = base_url + X + '/' + id + '/';
+            console.log('requesting for id '+id);
             $http.delete(delete_url, {'headers': headers})
                 .then(function(response){
                     for (var i=0; i<this_[X].length; i++){
@@ -201,9 +201,9 @@ angular.module('link-app').controller('LinksController',[ 'authService',
                 function(response){
                     console.log(response);
                 });
-        } 
+            });
         this.linksToDel = [];
-    };
+        };
 
     this.getLinks();
     this.getCategories(); 
