@@ -196,7 +196,7 @@ angular.module('link-app').controller('ContactsController',[ 'authService',
 
     this.submitGroup = function(){
         data = {
-            'name': this.updatedGroupName
+            'name': this.groupName
         };
         $http.post(groups_url, data, {'headers': headers}).
             then(function(response){
