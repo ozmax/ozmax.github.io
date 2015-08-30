@@ -50,6 +50,7 @@ angular.module('link-app').controller('LinksController',[ 'authService',
             return false;
         }
     };
+
     this.populateLinkEditDropDown = function(link){
         this.selectedEditCategories= [];
         if (link){
@@ -180,6 +181,7 @@ angular.module('link-app').controller('LinksController',[ 'authService',
             }
         } 
     };
+
     this.getCategories = function(){
         headers = {'Authorization': "Token " + authService.auth_token};
         $http.get(cat_url, {'headers': headers}).
@@ -219,8 +221,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     };
     // --- end categories ---
 
-    
-
     // --- common edit form mechs ---
     this.currentLinkEdit = '';
     this.currentCategoryEdit = '';
@@ -237,7 +237,7 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         }
     };
     // --- end edit form mechs ---
-    
+
     this.getLinks();
     this.getCategories(); 
 }]);
