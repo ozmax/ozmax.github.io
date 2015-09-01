@@ -43,7 +43,7 @@ app.config(['$routeProvider', function($routeProvider){
             controller: 'LoginController',
             controllerAs: 'loginCtrl'
         }).
-        when('/password/reset', {
+        when('/password/reset/:uid/:token', {
             templateUrl: 'password/reset_password.html',
             controller: 'resetPasswordController',
             controllerAs: 'rCtrl'
