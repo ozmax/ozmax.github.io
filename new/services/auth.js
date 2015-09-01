@@ -1,4 +1,5 @@
-angular.module('link-app').service('authService', ['$http', '$location', '$cookies', function($http, $location, $cookies){
+angular.module('link-app').service('authService', ['$http', '$location',
+'$window', '$cookies', function($http, $location, $window, $cookies){
     base_url = "http://ozmaxplanet.com:8000"
     login_url = base_url + '/auth/login/';
     logout_url = base_url + '/auth/logout/'
@@ -38,10 +39,10 @@ angular.module('link-app').service('authService', ['$http', '$location', '$cooki
                 this_service.auth_token = '';
                 this_service.isAuthenticated = false;
                 $cookies.remove('token');
-                $location.path('/login');
+                $window.location = '#/login';
             },
             function(response){
-                the_service.check_304(response);
+                the_service.check_401(response);
             });
     
     };
