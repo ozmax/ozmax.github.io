@@ -1,4 +1,4 @@
-<div id="links-wrapper" style="width: 600px; margin:0 auto;" class="row">
+<div id="links-wrapper" style="width: 600px; margin: 0 auto; margin-top:180px;">
 
         <div id="loginbox" ng-show="loginCtrl.currentForm == 'loginform'">
             <div class="panel panel-primary">
@@ -96,6 +96,8 @@
                             OK
                         </a>
                         </span>
+                        <a class="btn btn-success"
+                        ng-click="loginCtrl.resetForms()">OK</a>
                     </div>
                 </div><!-- panel-footer ends here -->
             </div><!-- panel ends here -->
@@ -105,12 +107,12 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <span class="col-xs-2" style="margin-top:6px;">
+                        <span class="col-md-2" style="margin-top:6px;">
                             Register 
                         </span>
-                        <span class="col-xs-8">
+                        <span class="col-md-8">
                         </span>
-                        <span class="col-xs-2">
+                        <span class="col-md-2">
                             <a href="" ng-click="loginCtrl.swapForm()" class="btn btn-warning">Login</a>
                         </span>
                         <div class="clearfix"></div>
