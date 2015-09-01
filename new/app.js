@@ -6,17 +6,16 @@ app.run(['$rootScope', '$location', 'authService', function($rootScope, $locatio
         ($location.path().indexOf('/password/reset') > -1)){
             var path = $location.path();
             $location.path(path);
-            console.log('in here')
         }
         else if (authService.isAuthenticated && ($location.path()=='/login')){
             $location.path('/links')
         }
         else if (!authService.isAuthenticated) {
             $location.path('/login')
-            console.log('in here too')
         }
     });
 }]);
+
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider.
         when('/profile', {
