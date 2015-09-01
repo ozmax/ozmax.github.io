@@ -26,7 +26,7 @@ angular.module('link-app').service('authService', ['$http', '$location',
         if (response.status == 401){
             this.auth_token = ''
             this.isAuthenticated = false;
-            $location.path('/links');
+            $window.location = '#/login';
         }
     };
 
@@ -42,7 +42,7 @@ angular.module('link-app').service('authService', ['$http', '$location',
                 $window.location = '#/login';
             },
             function(response){
-                the_service.check_401(response);
+                this_service.check_401(response);
             });
     
     };

@@ -2,11 +2,18 @@
 var app = angular.module('link-app', ['ngCookies', 'ngRoute']);
 app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
     $rootScope.$on('$routeChangeStart', function(event){
-        if (authService.isAuthenticated && ($location.path()=='/login')){
+        console.log($location.path());
+        if (!authService.isAuthenticated && $location.path() == '/password/reset'){
+            var path = $location.path();
+            $location.path(path);
+            console.log('in here')
+        }
+        else if (authService.isAuthenticated && ($location.path()=='/login')){
             $location.path('/links')
         }
-        if (!authService.isAuthenticated){
+        else if (!authService.isAuthenticated) {
             $location.path('/login')
+            console.log('in here too')
         }
     });
 }]);
@@ -34,6 +41,11 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'login/login.html',
             controller: 'LoginController',
             controllerAs: 'loginCtrl'
+        }).
+        when('/password/reset', {
+            templateUrl: 'password/reset_password.html',
+            controller: 'resetPasswordController',
+            controllerAs: 'rCtrl'
         }).
         otherwise({
             redirectTo: '/links'
