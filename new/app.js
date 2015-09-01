@@ -4,7 +4,7 @@ app.run(['$rootScope', '$location', 'authService', function($rootScope, $locatio
     $rootScope.$on('$routeChangeStart', function(event){
         console.log($location.path().indexOf('/password/reset'));
         if (!authService.isAuthenticated &&
-        $location.path().indexOf('/password/reset'))>-1{
+        $location.path().indexOf('/password/reset')>-1){
             var path = $location.path();
             $location.path(path);
             console.log('in here')
