@@ -3,7 +3,18 @@
         <div id="loginbox" ng-show="loginCtrl.currentForm == 'loginform'">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <div class="panel-title">Sign In</div>
+                    <div class="panel-title">
+                        <span class="col-md-2" style="margin-top:6px;">
+                            Sign In
+                        </span>
+                        <span class="col-md-8">
+                        </span>
+                        <span class="col-md-2">
+                            <a href="#" ng-click="loginCtrl.swapForm()"
+                            class="btn btn-warning">Register</a>
+                        </span>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
                 <div class="panel-body" style="padding-top:30px">
                     
@@ -40,25 +51,73 @@
                             </p>
                         </div>
                         
-                        <div class="col-sm-12 controls" style="padding-left:50px;">
-                            <input type="submit" value="Login" class="btn
-                            btn-success" />
-                            <a href="#" ng-click="loginCtrl.swapForm()" class="btn btn-info">Sign Up</a>
+                        <div class="col-sm-12 controls" style="text-align:center">
+                            <input type="submit" value="Login" class="btn btn-success"/>
                         </div>
                     
                     </form>
-
                 </div>
-            </div>
+                <div style="background-color:white;" class="panel-footer text-center">
+                
+                    <div ng-show="loginCtrl.preEmail">
+                        <div ng-hide="loginCtrl.forgotForm">
+                            <a href="" ng-click="loginCtrl.swapForgotForm()">Forgot password?</a>
+                        </div>
+                        <div ng-show="loginCtrl.forgotForm">
+                                <p class="help-block">
+                                    A reset password link will be sent to the
+                                    submitted email.
+                                </p>
+                            <span class="col-xs-2">
+                                <a class="btn btn-xm btn-danger" ng-click="loginCtrl.swapForgotForm()">Cancel</a>
+                            </span>
+                            <span class="col-xs-8">
+                                <input class="form-control" type="text" placeholder="example@example.com"
+                                ng-model="loginCtrl.resetEmail">
+                            </span>
+                            <span class="col-xs-2">
+                                <a class="btn btn-info" ng-click="loginCtrl.submitResetEmail()">
+                                    Send mail
+                                </a>
+                            </span>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div ng-hide="loginCtrl.preEmail">
+                        <span class="text-success" ng-show="loginCtrl.finishRequestWithSuccess">
+                            {{loginCtrl.successEmailMessage}}
+                            <a class="btn btn-success" ng-click="loginCtrl.resetForms()">
+                                OK
+                            </a>
+                        </span>
+                        <span class="text-danger" ng-show="loginCtrl.finishRequestWithFail">
+                            {{loginCtrl.failEmailMessage}}
+                        <a class="btn btn-danger" ng-click="loginCtrl.resetForms()">
+                            OK
+                        </a>
+                        </span>
+                    </div>
+                </div><!-- panel-footer ends here -->
+            </div><!-- panel ends here -->
         </div><!-- login div ends here -->
 
         <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform' && loginCtrl.notReg">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <div class="panel-title">Sign Up</div>
+                    <div class="panel-title">
+                        <span class="col-md-2" style="margin-top:6px;">
+                            Register 
+                        </span>
+                        <span class="col-md-8">
+                        </span>
+                        <span class="col-md-2">
+                            <a href="" ng-click="loginCtrl.swapForm()" class="btn btn-warning">Login</a>
+                        </span>
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
                 <div class="panel-body">
-                    
+
                     <form id="signupform" ng-submit="loginCtrl.register()" class="form-horizontal" role="form">
 
                         <div class="form-group" ng-class="{'has-error':loginCtrl.er_reg_username}">
@@ -109,9 +168,8 @@
                             </div>
                         </div>
 
-                        <div class="col-sm-12 controls" style="padding-left:100px;">
+                        <div class="col-sm-12 controls" style="text-align:center;">
                             <input type="submit" value="Register" class="btn btn-success" />
-                            <a href="#" ng-click="loginCtrl.swapForm()" class="btn btn-info">Login</a>
                         </div>
 
                     </form>

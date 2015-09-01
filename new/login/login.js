@@ -92,4 +92,43 @@ function(authService, $location, $cookies, $http){
                 }
             });
     };
+
+    // --- Forgot Password Mechs ---
+    this.forgotForm = false;
+    this.preEmail = true;
+    this.finishRequest = false;
+    this.swapForgotForm = function(){
+        if (this.forgotForm == false){
+            this.forgotForm = true;
+        }
+        else{
+            this.forgotForm = false;
+        }
+    console.log(this.forgotForm)
+    };
+
+    this.submitResetEmail = function(){
+        reset_url = "http://ozmaxplanet.com:8000/auth/password/reset/"
+        data = {'email': this.resetEmail};
+        this.preEmail = false;
+        $http.post(reset_url, data).then(
+            function(response){
+                this_.finishRequestWithSuccess = true
+                this_.successEmailMessage = "The recovery link is sent to your inbox!";
+            },
+            function(response){
+                this_.finishRequestWithFail = true
+                this_.failEmailMessage = "Sorry to inform you that something went wrong!";
+        });
+    };
+    this.resetForms = function(){
+        this.swapForgotForm();
+        this.successEmailMessage = '';
+        this.failEmailMessage = '';
+        this.preEmail = true;
+        this.resetEmail = '';
+        this.finishRequestWithSuccess = false;
+        this.finishRequestWithFail = false;
+    }
+    // --- end forgot pass mechs ---
 }]);
