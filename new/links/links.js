@@ -52,7 +52,7 @@ angular.module('link-app').controller('LinksController',[ 'authService',
     };
 
     this.populateLinkEditDropDown = function(link){
-        this.selectedEditCategories= [];
+        this.selectedEditCategories = [];
         if (link){
             for (var i=0; i<link.categories.length; i++){
                 this.selectedEditCategories.push(link.categories[i].id);
