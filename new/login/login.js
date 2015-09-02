@@ -104,7 +104,6 @@ function(authService, $location, $cookies, $http){
         else{
             this.forgotForm = false;
         }
-    console.log(this.forgotForm)
     };
 
     this.submitResetEmail = function(){
