@@ -2,13 +2,15 @@
 var app = angular.module('link-app', ['ngCookies', 'ngRoute']);
 app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
     $rootScope.$on('$routeChangeStart', function(event){
+        console.log('isAuthenticated: '+authService.isAuthenticated);
         if ((!authService.isAuthenticated) &&
         ($location.path().indexOf('/password/reset') > -1)){
             var path = $location.path();
             $location.path(path);
         }
         else if (authService.isAuthenticated && ($location.path()=='/login')){
-            $location.path('/links')
+            console.log('inside redirect->isAuthenticated: '+authService.isAuthenticated);
+            $location.path('/links');
         }
         else if (!authService.isAuthenticated) {
             $location.path('/login')
