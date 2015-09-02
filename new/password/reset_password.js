@@ -4,7 +4,7 @@ $location, $routeParams, $route){
 
     uid = $routeParams.uid;
     token = $routeParams.token;
-    this.foo = function(){
+    this.resetPassword = function(){
         data = {
             'uid': uid,
             'token': token,
