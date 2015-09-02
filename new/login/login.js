@@ -108,15 +108,18 @@ function(authService, $location, $cookies, $http){
     };
 
     this.submitResetEmail = function(){
-        reset_url = "http://ozmaxplanet.com:8000/auth/password/reset/"
-        data = {'email': this.resetEmail};
         this.preEmail = false;
+        this.loading = true;
+        var reset_url = "http://ozmaxplanet.com:8000/auth/password/reset/"
+        var data = {'email': this.resetEmail};
         $http.post(reset_url, data).then(
             function(response){
+                this_.loading = false;
                 this_.finishRequestWithSuccess = true
                 this_.successEmailMessage = "The recovery link is sent to your inbox!";
             },
             function(response){
+                this_.loading = false;
                 this_.finishRequestWithFail = true
                 this_.failEmailMessage = "Sorry to inform you that something went wrong!";
         });

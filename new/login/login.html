@@ -83,6 +83,11 @@
                         </div>
                         <div class="clearfix"></div>
                     </div>
+                    <div ng-show="loginCtrl.loading">
+                        <span>
+                            <i class="fa fa-spinner fa-lg fa-spin"></i>
+                        </span>
+                    </div>
                     <div ng-hide="loginCtrl.preEmail">
                         <span class="text-success" ng-show="loginCtrl.finishRequestWithSuccess">
                             {{loginCtrl.successEmailMessage}}
@@ -96,8 +101,6 @@
                             OK
                         </a>
                         </span>
-                        <a class="btn btn-success"
-                        ng-click="loginCtrl.resetForms()">OK</a>
                     </div>
                 </div><!-- panel-footer ends here -->
             </div><!-- panel ends here -->
