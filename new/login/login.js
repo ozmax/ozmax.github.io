@@ -138,9 +138,9 @@ function(authService, $location, $cookies, $http){
     this.googleLogin = function(){
         console.log('in google');
         headers = {
-            'Access-Control-Allow-Origin': 'https://ozmax.github.io',
+            'Access-Control-Allow-Origin': "",
             'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': '*, X-Requested-With, X-Prototype-Version, X-CSRF-Token, Content-Type',
+            'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Max-Age':"1728000",
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         
