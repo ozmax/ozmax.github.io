@@ -138,7 +138,7 @@ function(authService, $location, $cookies, $http){
     this.googleLogin = function(){
         console.log('in google');
         headers = {
-            'Access-Control-Allow-Origin': "",
+            'Access-Control-Allow-Origin': "*",
             'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': 'Content-Type',
             'Access-Control-Max-Age':"1728000",
