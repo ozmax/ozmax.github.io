@@ -141,7 +141,9 @@ function(authService, $location, $cookies, $http){
             'Access-Control-Allow-Origin': 'https://ozmax.github.io',
             'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
             'Access-Control-Allow-Headers': '*, X-Requested-With, X-Prototype-Version, X-CSRF-Token, Content-Type',
-            'Access-Control-Max-Age':"1728000"
+            'Access-Control-Max-Age':"1728000",
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                        
             };
         data = {
             'client_id': '29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com',
