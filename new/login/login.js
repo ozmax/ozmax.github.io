@@ -133,4 +133,30 @@ function(authService, $location, $cookies, $http){
         this.finishRequestWithFail = false;
     }
     // --- end forgot pass mechs ---
+
+    // google login test
+    this.googleLogin = function(){
+        console.log('in google');
+        headers = {
+            'Access-Control-Allow-Origin': 'http://localhost',
+            'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': '*, X-Requested-With, X-Prototype-Version, X-CSRF-Token, Content-Type',
+            'Access-Control-Max-Age':"1728000"
+            };
+        data = {
+            'client_id': '29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com',
+            'response_type': 'code',
+            'scope': 'email',
+            'redirect_uri': 'http://ozmaxplanet.com:8000/auth/google/',
+        };
+        var oauth2_url = 'https://accounts.google.com/o/oauth2/auth';
+        $http.post(oauth2_url, data, {'headers':headers}).then(
+            function(response){
+                console.log(response);
+            },
+            function(response){
+                console.log(response);
+            });
+    };
+    //
 }]);

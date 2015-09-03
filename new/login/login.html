@@ -52,11 +52,14 @@
                             </p>
                         </div>
                         
-                        <div class="col-sm-12 controls" style="text-align:center">
+                        <div class="" style="text-align:center">
                             <input type="submit" value="Login" class="btn btn-success"/>
                         </div>
+
+                        
                     
                     </form>
+
                 </div>
                 <div style="background-color:white;" class="panel-footer text-center">
                 
@@ -105,6 +108,19 @@
                     </div>
                 </div><!-- panel-footer ends here -->
             </div><!-- panel ends here -->
+<div class="" style="text-align:center">
+                            <span class="row"><h6>Login with</h6></span>
+                            <span class="row">
+                            <a class="btn btn-danger"
+                            ng-click="loginCtrl.googleLogin()">
+                               <i class="fa fa-google"></i>
+                            </a>
+                            <a class="btn btn-primary">
+                               <i class="fa fa-facebook"></i>
+                            </a>
+                            </span>
+                        </div>
+                        <hr>
         </div><!-- login div ends here -->
 
         <div id="signupbox" ng-show="loginCtrl.currentForm == 'registerform' && loginCtrl.notReg">
