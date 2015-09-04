@@ -134,19 +134,12 @@ function(authService, $location, $cookies, $http){
     }
     // --- end forgot pass mechs ---
 
-    // google login test
-    this.googleLogin = function(){
-        console.log('in google');
-        var params =
-        'client_id=29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com&response_type=code&scope=email&redirect_uri=http://ozmaxplanet.com:8000/auth/google/';
-        var oauth2_url = 'https://accounts.google.com/o/oauth2/auth';
-        $http.get(oauth2_url+'?'+params).then(
-            function(response){
-                console.log(response);
-            },
-            function(response){
-                console.log(response);
-            });
-    };
+    // google login
+    var client_id = 'client_id=29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com';
+    var response_type = 'response_type=code';
+    var scope ='scope=email';
+    var redirect = 'redirect_uri=http://ozmaxplanet.com:8000/auth/google/';
+    var google_oauth2 = 'https://accounts.google.com/o/oauth2/auth';
+    this.google_url = google_oauth2+'?'+client_id+'&'+response_type+'&'+scope+'&'+redirect;
     //
 }]);
