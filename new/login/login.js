@@ -136,26 +136,11 @@ function(authService, $location, $cookies, $http){
 
     // google login test
     this.googleLogin = function(){
-        $http.defaults.useXDomain = true;
-        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-        delete $http.defaults.headers.common['X-Requested-With'];
         console.log('in google');
-        headers = {
-            'Access-Control-Allow-Origin': "*"
-            //'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
-            //'Access-Control-Allow-Headers': 'Content-Type',
-            //'Access-Control-Max-Age':"1728000",
-            //'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-                        
-            };
-        data = {
-            'client_id': '29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com',
-            'response_type': 'code',
-            'scope': 'email',
-            'redirect_uri': 'http://ozmaxplanet.com:8000/auth/google/',
-        };
+        var params =
+        'client_id=29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com&response_type=code&scope=email&redirect_uri=http://ozmaxplanet.com:8000/auth/google/';
         var oauth2_url = 'https://accounts.google.com/o/oauth2/auth';
-        $http.post(oauth2_url, data, {'headers':headers}).then(
+        $http.get(oauth2_url+'?'+params).then(
             function(response){
                 console.log(response);
             },

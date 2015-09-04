@@ -1,9 +1,10 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/more.css">
+    <meta name="google-signin-client_id" content="29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com">
+    
 </head>
 
 <body ng-app="link-app">
@@ -23,6 +24,22 @@
     <script src="contacts/contacts.js"></script>
     <script src="links/links.js"></script>
     <script src="password/reset_password.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="https://apis.google.com/js/client:platform.js" async defer>
+</script>
+    <script>
+function Google_signIn(googleUser) {
+    alert("foo");
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId());
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+  //pass information to server to insert or update the user record
+  //update_user_data(profile);
+};
+
+    </script>
 </body>
 
 </html>
