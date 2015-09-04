@@ -136,13 +136,16 @@ function(authService, $location, $cookies, $http){
 
     // google login test
     this.googleLogin = function(){
+        $http.defaults.useXDomain = true;
+        $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+        delete $http.defaults.headers.common['X-Requested-With'];
         console.log('in google');
         headers = {
-            'Access-Control-Allow-Origin': "*",
-            'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Content-Type',
-            'Access-Control-Max-Age':"1728000",
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            'Access-Control-Allow-Origin': "*"
+            //'Access-Control-Allow-Methods': 'POST, GET, PUT, DELETE, OPTIONS',
+            //'Access-Control-Allow-Headers': 'Content-Type',
+            //'Access-Control-Max-Age':"1728000",
+            //'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                         
             };
         data = {
