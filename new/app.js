@@ -2,7 +2,13 @@
 var app = angular.module('link-app', ['ngCookies', 'ngRoute']);
 app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
     $rootScope.$on('$routeChangeStart', function(event){
+        console.log(authService.auth_token);
         if ((!authService.isAuthenticated) &&
+        ($location.path().indexOf('/get_token') > -1)){
+            var path = $location.path();
+            $location.path(path);
+        }
+        else if ((!authService.isAuthenticated) &&
         ($location.path().indexOf('/password/reset') > -1)){
             var path = $location.path();
             $location.path(path);
@@ -40,6 +46,11 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'login/login.html',
             controller: 'LoginController',
             controllerAs: 'loginCtrl'
+        }).
+        when('/get_token', {
+            templateUrl: 'login/login.html',
+            controller: 'getTokenController',
+            controllerAs: 'gtCtrl'
         }).
         when('/password/reset/:uid/:token', {
             templateUrl: 'password/reset_password.html',
