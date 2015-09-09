@@ -135,11 +135,21 @@ function(authService, $location, $cookies, $http){
     // --- end forgot pass mechs ---
 
     // google login
-    var client_id = 'client_id=29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com';
-    var response_type = 'response_type=code';
-    var scope ='scope=email';
-    var redirect = 'redirect_uri=http://ozmaxplanet.com:8000/auth/google/';
+    var g_client_id = 'client_id=29062372242-j8bir9ataqad5a1v0u5gsdb1m2sv3jum.apps.googleusercontent.com';
+    var g_response_type = 'response_type=code';
+    var g_scope ='scope=email';
+    var g_redirect = 'redirect_uri=http://ozmaxplanet.com:8000/auth/google/';
     var google_oauth2 = 'https://accounts.google.com/o/oauth2/auth';
-    this.google_url = google_oauth2+'?'+client_id+'&'+response_type+'&'+scope+'&'+redirect;
+    this.google_url = google_oauth2+'?'+g_client_id+'&'+g_response_type+'&'+g_scope+'&'+g_redirect;
+    //
+
+    // facebook login
+    var f_client_id = 'client_id=1644968275771867';
+    var f_response_type = 'response_type=code';
+    var f_scope ='scope=email';
+    var f_redirect = 'redirect_uri=http://ozmaxplanet.com:8000/auth/facebook/';
+    var facebook_oauth2 = 'https://www.facebook.com/dialog/oauth';
+    this.facebook_url =
+    facebook_oauth2+'?'+f_client_id+'&'+f_response_type+'&'+f_scope+'&'+f_redirect;
     //
 }]);
