@@ -153,6 +153,6 @@ function(authService, $location, $cookies, $http){
     var f_state = 'state=FB';
     var facebook_oauth2 = 'https://www.facebook.com/dialog/oauth';
     this.facebook_url =
-    facebook_oauth2+'?'+f_client_id+'&'+f_response_type+'&'+f_scope+'&'+f_state+'&'+f_redirect;
+    facebook_oauth2+'?'+f_client_id+'&'+f_response_type+'&'+f_scope+'&'+f_redirect+'&'+f_state;
     //
 }]);
