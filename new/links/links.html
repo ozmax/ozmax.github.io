@@ -96,7 +96,7 @@
                                 <li ng-repeat="cat in lCtrl.categories">
                                     <a href=""
                                     ng-click="lCtrl.clickXCategory('Edit', cat.id)">
-                                        {{cat.name}}
+                                        {{cat.name}} {{cat.link_count}}
                                         <i style="color:black;" class="fa fa-check pull-right"
                                         ng-show="lCtrl.isXChecked('Edit', cat.id)"></i>
                                     </a>
