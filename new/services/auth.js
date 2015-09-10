@@ -32,7 +32,10 @@ angular.module('link-app').service('authService', ['$http', '$location',
 
     
     this.logout = function(){
-        headers = {'Authorization': 'Token '+ this.auth_token};
+        headers = {
+            'Authorization': 'Token '+ this.auth_token,
+            'Content-Type': "application/x-www-form-urlencoded"        
+        };
         this_service = this;
         $http.post(logout_url,{}, {'headers': headers}).
             then(function(response){
@@ -42,6 +45,8 @@ angular.module('link-app').service('authService', ['$http', '$location',
                 $window.location = '#/login';
             },
             function(response){
+                console.log('sth went wrong omg!');
+                console.log(response)
                 this_service.check_401(response);
             });
     
