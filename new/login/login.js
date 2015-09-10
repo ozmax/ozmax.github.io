@@ -141,8 +141,7 @@ function(authService, $location, $cookies, $http){
     var g_redirect = 'redirect_uri=http://ozmaxplanet.com:8000/auth/oauth2/';
     var g_state = 'state=GOOGLE';
     var google_oauth2 = 'https://accounts.google.com/o/oauth2/auth';
-    this.google_url =
-    google_oauth2+'?'+g_client_id+'&'+g_response_type+'&'+g_scope+'&'+g_redirect+'&'+g_state;
+    this.google_url = google_oauth2+'?'+g_client_id+'&'+g_response_type+'&'+g_scope+'&'+g_redirect+'&'+g_state;
     //
 
     // facebook login

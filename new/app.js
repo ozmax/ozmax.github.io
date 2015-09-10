@@ -2,7 +2,6 @@
 var app = angular.module('link-app', ['ngCookies', 'ngRoute']);
 app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService){
     $rootScope.$on('$routeChangeStart', function(event){
-        console.log(authService.auth_token);
         if ((!authService.isAuthenticated) &&
         ($location.path().indexOf('/get_token') > -1)){
             var path = $location.path();

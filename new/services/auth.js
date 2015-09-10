@@ -52,4 +52,3 @@ angular.module('link-app').service('authService', ['$http', '$location',
     
     };
 }]);
-
