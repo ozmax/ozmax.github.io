@@ -50,7 +50,8 @@
                 </tr>
             </thead>
             <tbody> 
-                <tr ng-repeat="link in lCtrl.links" class="hoveror row">
+                <tr ng-repeat="link in
+                lCtrl.links|chosenCategories:lCtrl.filterCategories" class="hoveror row">
                     <td class="col-md-1">
                         <div class="input-group input-group-sm" style="max-width:30px; min-height: 27px;"
                         ng-hide="lCtrl.currentLinkEdit == link.id">
@@ -96,7 +97,7 @@
                                 <li ng-repeat="cat in lCtrl.categories">
                                     <a href=""
                                     ng-click="lCtrl.clickXCategory('Edit', cat.id)">
-                                        {{cat.name}} {{cat.link_count}}
+                                        {{cat.name}}
                                         <i style="color:black;" class="fa fa-check pull-right"
                                         ng-show="lCtrl.isXChecked('Edit', cat.id)"></i>
                                     </a>
@@ -187,7 +188,13 @@
                     </td>
                     <td class="col-md-9">
                         <div ng-hide="lCtrl.currentCategoryEdit == category.id">
-                            {{category.name}}
+                            <a class="btn" 
+                            ng-click="lCtrl.addToFilterCategories(category.id)"> 
+                            {{category.name}}&nbsp;
+                            <span class="badge">
+                                {{category.link_count}}
+                            </span>
+                            </a>
                         </div>
                         <div ng-show="lCtrl.currentCategoryEdit == category.id">
                             <input type="text" class="form-control"

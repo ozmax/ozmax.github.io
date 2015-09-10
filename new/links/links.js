@@ -143,13 +143,13 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         $http.post(links_url, data, {'headers': headers}).
             then(function(response){
                 this_.getLinks();
+                this_.getCategories();
                 this_.closeAndCleanLinkForm();
             },
             function(response){
                 console.log(response);
             });
     };
-    
     this.closeAndCleanLinkForm = function(){
         this.reg_url = '';
         this.selectedCategories = [];
@@ -219,6 +219,18 @@ angular.module('link-app').controller('LinksController',[ 'authService',
                 console.log(response);
             });
     };
+
+    this.filterCategories = [];
+    this.addToFilterCategories = function(id){
+        pos = this.filterCategories.indexOf(id);
+        if (pos > -1) {
+            this.filterCategories.splice(pos, 1);
+        }
+        else{
+            this.filterCategories.push(id);
+        }
+       console.log(this.filterCategories); 
+    };
     // --- end categories ---
 
     // --- common edit form mechs ---
@@ -240,4 +252,19 @@ angular.module('link-app').controller('LinksController',[ 'authService',
 
     this.getLinks();
     this.getCategories(); 
+    this.filterCategory = '';
 }]);
+
+angular.module('link-app').filter('chosenCategories', function(){
+    return function(links, categories){
+        filtered = [];
+        for(var j=0; j<links.length; j++){
+            for(var i=0; i<categories.length; i++){
+                if (links[i].categories.indexOf(categories[i])>-1){
+                    filtered.push(links[i]);
+                }
+            }
+        }
+        return filtered;
+    };
+});
