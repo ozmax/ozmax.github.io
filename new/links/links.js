@@ -230,6 +230,15 @@ angular.module('link-app').controller('LinksController',[ 'authService',
             this.filterCategories.push(id);
         }
     };
+    this.isInFiltered = function(id){
+        var pos = this.filterCategories.indexOf(id);
+        if (pos > -1){
+            return true;
+        }
+        else{
+            return false;
+        }
+    };
     // --- end categories ---
 
     // --- common edit form mechs ---

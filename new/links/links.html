@@ -157,10 +157,6 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-show="lCtrl.showCatForm">
-                    <td>
-                    </td>
-                </tr>
                 <tr ng-repeat="category in lCtrl.categories" class="hoveror">
                     <td style="width:20px; display:inline-block;"
                     class="col-md-2">
@@ -188,12 +184,12 @@
                     </td>
                     <td class="col-md-9">
                         <div ng-hide="lCtrl.currentCategoryEdit == category.id">
-                            <a class="btn" 
-                            ng-click="lCtrl.addToFilterCategories(category.id)"> 
-                            {{category.name}}&nbsp;
-                            <span class="badge">
-                                {{category.link_count}}
-                            </span>
+                            <a class="btn" ng-click="lCtrl.addToFilterCategories(category.id)"
+                            ng-class="{'active': lCtrl.isInFiltered(category.id)}">
+                                {{category.name}}&nbsp;
+                                <span class="badge">
+                                    {{category.link_count}}
+                                </span>
                             </a>
                         </div>
                         <div ng-show="lCtrl.currentCategoryEdit == category.id">
