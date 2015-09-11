@@ -229,7 +229,6 @@ angular.module('link-app').controller('LinksController',[ 'authService',
         else{
             this.filterCategories.push(id);
         }
-       console.log(this.filterCategories); 
     };
     // --- end categories ---
 
@@ -256,15 +255,25 @@ angular.module('link-app').controller('LinksController',[ 'authService',
 }]);
 
 angular.module('link-app').filter('chosenCategories', function(){
-    return function(links, categories){
-        filtered = [];
-        for(var j=0; j<links.length; j++){
-            for(var i=0; i<categories.length; i++){
-                if (links[i].categories.indexOf(categories[i])>-1){
-                    filtered.push(links[i]);
+    return function(items, catIDs){
+        if(catIDs.length == 0){
+            return items;
+        }
+        else{
+            var filtered = [];
+            for(var i=0; i<catIDs.length; i++){
+                catId = catIDs[i];
+                for (var j=0; j<items.length; j++){
+                    item = items[j];
+                    for(var k=0; k<item.categories.length; k++){
+                        category = item.categories[k];
+                        if(category.id == catId){
+                            filtered.push(item);
+                        }
+                    }
                 }
             }
+            return filtered;
         }
-        return filtered;
     };
 });
