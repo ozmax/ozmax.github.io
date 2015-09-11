@@ -277,7 +277,17 @@ angular.module('link-app').filter('chosenCategories', function(){
                     for(var k=0; k<item.categories.length; k++){
                         category = item.categories[k];
                         if(category.id == catId){
-                            filtered.push(item);
+                            var found = false;
+                            for(var l=0;l<filtered.length; l++){
+                                fitem = filtered[l];
+                                if(fitem.id == item.id){
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if(!found){
+                                filtered.push(item);
+                            }
                         }
                     }
                 }

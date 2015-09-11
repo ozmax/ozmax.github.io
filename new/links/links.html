@@ -45,8 +45,11 @@
             <hr>
             </caption>
             <thead>
-                <tr>
-                    <th>#</th><th>URL</th><th>Categories</th><th>Date</th>
+                <tr class="row">
+                    <th class="col-md-1">#</th>
+                    <th class="col-md-8">URL</th>
+                    <th class="col-md-1">Categories</th>
+                    <th class="col-md-2">Date</th>
                 </tr>
             </thead>
             <tbody> 
@@ -85,7 +88,7 @@
                     </td>
                     <td class="col-md-1">
                         <div ng-repeat="category in link.categories" ng-hide="lCtrl.currentLinkEdit == link.id">
-                            <span class="label label-primary" style="color:black;" >
+                            <span class="label label-success" style="color:black;" >
                                 {{category.name}}
                             </span>&nbsp;
                         </div>
@@ -159,7 +162,7 @@
             <tbody>
                 <tr ng-repeat="category in lCtrl.categories" class="hoveror">
                     <td style="width:20px; display:inline-block;"
-                    class="col-md-2">
+                    class="col-md-1">
                         <div ng-hide="lCtrl.currentCategoryEdit == category.id">
                         <div class="input-group input-group-sm" style="width:30px; min-height: 27px;">
                             <span class="input-group-btn">
@@ -182,10 +185,10 @@
                             </a>
                         </div>
                     </td>
-                    <td class="col-md-9">
+                    <td class="col-md-10">
                         <div ng-hide="lCtrl.currentCategoryEdit == category.id">
                             <a class="btn" ng-click="lCtrl.addToFilterCategories(category.id)"
-                            ng-class="{'active': lCtrl.isInFiltered(category.id)}">
+                            ng-class="{'active': lCtrl.isInFiltered(category.id)}"> 
                                 {{category.name}}&nbsp;
                                 <span class="badge">
                                     {{category.link_count}}
@@ -197,7 +200,9 @@
                             ng-model="lCtrl.updatedCategory">
                         </div>
                     </td>
-                    <td class="col-md-1"ng-show="lCtrl.currentCategoryEdit == category.id">
+                    <td class="col-md-1" ng-hide="lCtrl.currentCategoryEdit == category.id">
+                    </td>
+                    <td class="col-md-1" ng-show="lCtrl.currentCategoryEdit == category.id">
                             <a class="btn btn-success"
                             ng-click="lCtrl.updateCategory(category.id)">Update</a>
                     </td>
